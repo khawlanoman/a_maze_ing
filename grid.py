@@ -7,11 +7,8 @@ class Cell():
         self.s = 1
         self.w = 1
 
-#width = int(input("enter Width:"))
-#height = int(input("enter height:"))
-
 with open("config.txt","r") as file:
-    
+
     array= {}
     for line in file:
         key, value = line.strip().split("=")
@@ -32,7 +29,6 @@ for key, value in array.items() :
         out_file = str(value)
     elif key == "PERFECT":
         prefect = bool(value)
-#gird_tab = [[random.choice(['.', '#']) for h in range(height)] for w in range(width)]
 
 gird_tab = []
 
@@ -50,9 +46,9 @@ for c in range(height):
             cell.w = 1
         if c == width -1:
             cell.e = 1
-        
+
         row.append(cell)
-        
+
     gird_tab.append(row)
 
 grid = []
@@ -71,6 +67,7 @@ for c in  range(height):
     grid.append(row)
 for i in grid:
         print(''.join(i))
+
 def cell_to_hex(cell):
     value = 0
     value += cell.n * 1
@@ -80,16 +77,14 @@ def cell_to_hex(cell):
     return format(value, 'x')
 
 
-file = open("output_maze.txt","w")
+file = open("output_maze.txt" ,"w")
 for c in range(height):
-    line =  ""
+    line = ""
     for r in range(width):
         line += cell_to_hex(maze[c][r])
     file.write(line +"\n")
 
-#█ ▄
 with open("maze.txt", "w") as file:
     for row in grid:
        file.write(''.join(row))
        file.write('\n')
-
