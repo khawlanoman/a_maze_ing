@@ -1,7 +1,7 @@
 import random
 
 
-class Cell():
+class Cell:
     def __init__(self):
         self.n = 1
         self.e = 1
