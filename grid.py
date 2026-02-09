@@ -1,5 +1,6 @@
 import random
 
+
 class Cell():
     def __init__(self):
         self.n = 1
@@ -56,21 +57,45 @@ for c in range(height):
     gird_tab.append(row)
 
 grid = []
+
+#top = ["▄▄"] * (width)
+#top.pop() 
+#grid.append(top)
+
+
+top_row = ["▄"]
+for r in range(width):
+
+    if maze[0][r].n == 1:
+        top_row.append("▄▄")
+   
+grid.append(top_row)
 for c in  range(height):
+
     row = []
+    row.append("█")
     for r in range(width):
+        
         cell = maze[c][r]
+       
         if cell.n == 1:
+            
             row.append("▄")
-        if cell.w == 1:
-            row.append("█")
+        else:
+             row.append(" ")
+       # if cell.w == 1:
+          #  row.append("█")
         if cell.e == 1:
             row.append("█")
-        if cell.s == 1:
-            continue
+        else:
+            row.append(" ")
+        #if cell.s == 1:
+          #  continue
     grid.append(row)
+
 for i in grid:
-        print(''.join(i))
+        print("".join(i))
+
 def cell_to_hex(cell):
     value = 0
     value += cell.n * 1
