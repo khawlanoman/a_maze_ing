@@ -19,26 +19,48 @@ def filter_config_data(config: dict[str, str]) -> dict[str, Any]:
         good_dict = {}
         for key, value in config.items():
             if key == 'WIDTH':
-                good_dict[key] = int(value)
+                if int(value) > 0:
+                    good_dict[key] = int(value)
+                else:
+                    raise ValueError("Error: WIDTH value cannot be negative!")
             elif key == 'HEIGHT':
-                good_dict[key] = int(value)
+                if int(value) > 0:
+                    good_dict[key] = int(value)
+                else:
+                    return "HEIGHT value cannot be negative!"
+            elif key == 'HEIGHT' and int(value) < 0:
+                return "Error: HEIGHT value cannot be negative!"
             elif key == 'ENTRY':
-                good_dict[key] = tuple(int(x) for x in value.split(","))
+                entry_tuple = tuple(int(x) for x in value.split(","))
+                print(entry_tuple)
+                if (len(entry_tuple) == 2):
+                    good_dict[key] = entry_tuple
+                else:
+                    return "Error: Invalid data in 'ENTRY' input in 'config.txt'"
             elif key == 'EXIT':
-                good_dict[key] = tuple(int(y) for y in value.split(","))
-            elif key == 'OUTPUT_FILE' and value == 'maze.txt':
-                good_dict[key] = value
+                exit_tuple = tuple(int(y) for y in value.split(","))
+                if (len(exit_tuple) == 2):
+                    good_dict[key] = exit_tuple
+                else:
+                    return "Error: Invalid data in 'EXIT' in 'config.txt'"
+            elif key == 'OUTPUT_FILE':
+                if value == 'maze.txt':
+                    good_dict[key] = value
+                else:
+                    return "Error: Invalid data in 'OUTPUT_FILE' in 'config.txt'"
             val = value.strip().upper()
             if key == 'PERFECT':
                 if val == "TRUE":
                     good_dict[key] = True
                 elif val == "FALSE":
                     good_dict[key] = False
+                else:
+                    return "Error: Invalid data in 'PERFECT' boolean stats!"
             else:
                 continue
         return good_dict
-    except ValueError:
-        print("Error: invalid data in 'config.txt' file.")
+    except ValueError as e:
+        print(f"Error: {e}")
 
 
 print(filter_config_data(read_file()))
