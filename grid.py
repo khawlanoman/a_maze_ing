@@ -18,7 +18,7 @@ with open("config.txt","r") as file:
         key, value = line.strip().split("=")
         array[key] = value
 
-print(array)
+
 
 for key, value in array.items() :
     if key == "WIDTH":
@@ -26,15 +26,16 @@ for key, value in array.items() :
     elif key == "HEIGHT":
         height = int(value)
     elif key == "ENTRY":
-        entry = (value)
+        entry = tuple(value)
     elif key == "EXIT":
-        exit_end = (value)
+        exit_end = tuple(map(int ,value.split(",")))
+        print(exit_end)
     elif key == "OUTPUT_FILE":
         out_file = str(value)
     elif key == "PERFECT":
         prefect = bool(value)
 #gird_tab = [[random.choice(['.', '#']) for h in range(height)] for w in range(width)]
-
+print(array)
 gird_tab = []
 
 maze = [[Cell() for c in range(width)] for r in range(height)]
