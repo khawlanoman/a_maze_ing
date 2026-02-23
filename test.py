@@ -97,8 +97,72 @@ for r in range(height):
 
 
 
+#########################################
+"""
+def remove_wall(maze, r, c, nr, nc, direction):
+
+    if direction == "N":
+        maze[r][c].n = False
+        maze[nr][nc].s = False
+
+    elif direction == "S":
+        maze[r][c].s = False
+        maze[nr][nc].n = False
+
+    elif direction == "E":
+        maze[r][c].e = False
+        maze[nr][nc].w = False
+
+    elif direction == "W":
+        maze[r][c].w = False
+        maze[nr][nc].e = False
 
 
+
+def aldous_broder(maze, width, height, block_42):
+
+    total_cells = width * height - len(block_42)
+
+    while True:
+        r = random.randint(0, height - 1)
+        c = random.randint(0, width - 1)
+        if (r, c) not in block_42:
+            break
+
+    visited = set()
+    visited.add((r, c))
+    visited_count = 1
+
+    current = (r, c)
+
+    while visited_count < total_cells:
+
+        r, c = current
+
+        neighbors = []
+
+        directions = {
+            "N": (-1, 0),
+            "S": (1, 0),
+            "E": (0, 1),
+            "W": (0, -1)
+        }
+
+        for direction, (dr, dc) in directions.items():
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < height and 0 <= nc < width:
+                if (nr, nc) not in block_42:
+                    neighbors.append((direction, nr, nc))
+
+        direction, nr, nc = random.choice(neighbors)
+
+        if (nr, nc) not in visited:
+            remove_wall(maze, r, c, nr, nc, direction)
+            visited.add((nr, nc))
+            visited_count += 1
+
+        current = (nr, nc)
+"""
 #for r in range(center_r, center_r + block_height):
 #    for c in range(center_c, center_c + block_width):
 #        maze[r][c].n = 1
@@ -150,7 +214,7 @@ grid1.append(bottom_row)
 for i in grid1:
      print("".join(i))
 """
-
+"""
 grid1 = []
 
 for r in range(height):
@@ -191,42 +255,46 @@ grid1.append(bottom_row)
 for line in grid1:
     print(line)
 
-
-#################
 """
-cell_width = 3 
-cell_height = 1 
+#################
+
+GREEN = "\033[42m"  
+RED = "\033[41m"  
+RESET = "\033[0m" 
+
+cell_width = 3
+cell_height = 1
 
 grid1 = []
 
-
 for r in range(height):
-
-    top_row = "█"  
+  
+    top_row = "█"
     for c in range(width):
-        if maze[r][c].n:
+        if maze[r][c].n:       
             top_row += "█" * cell_width
         else:
             top_row += " " * cell_width
-        top_row += "█"  
+        top_row += "█"
     grid1.append(top_row)
 
- 
+   
     for h in range(cell_height):
-        row = "█" 
+        row = "█"  
         for c in range(width):
-            if(r,c)  in blocK_42:
-                row +="   "
-            elif (r,c) == entry:
-                content = f"{GREEN} ▄ {RESET}"
-            elif (r,c) == exit_end:
-                content = f"{RED} ▄ {RESET}"
+            if (r, c) in blocK_42:
+                content = f"{GREEN}***{RESET}"
+            elif (r, c) == entry:
+                content = f"{GREEN}   {RESET}"
+            elif (r, c) == exit_end:
+                content = f"{RED}   {RESET}"
             else:
-                content = "   " 
+                content = " " * cell_width
 
             row += content
 
-            if c == width-1 or maze[r][c].e:
+           
+            if c == width - 1 or maze[r][c].e:
                 row += "█"
             else:
                 row += " "
@@ -241,7 +309,6 @@ grid1.append(bottom_row)
 
 for line in grid1:
     print(line)
-"""
 #################################
 
 def cell_to_hex(cell):
