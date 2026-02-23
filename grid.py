@@ -10,6 +10,7 @@ class Cell:
         self.e = 1
         self.s = 1
         self.w = 1
+        #self.blocK_42 = False
 
 
 with open("config.txt","r") as file:
@@ -35,9 +36,7 @@ for key, value in array.items() :
         out_file = str(value)
     elif key == "PERFECT":
         prefect = bool(value)
-#gird_tab = [[random.choice(['.', '#']) for h in range(height)] for w in range(width)]
 
-print(array)
 gird_tab = []
 
 maze = [[Cell() for c in range(width)] for r in range(height)]
@@ -59,7 +58,22 @@ for c in range(height):
         
     gird_tab.append(row)
 
+############################
+block_height = 5
+block_width = 7
 
+y =( height // 2) -( block_height // 2)
+x =( width // 2)- (block_width // 2)
+blocK_42 = [(y, x),(y, x + 4),(y, x + 5),(y, x + 6),
+            (y+1,x),(y+1,x + 6),
+            (y+2,x),(y+2,x+1),(y+2,x+2),(y+2,x+4),(y+2,x+5),(y+2,x+ 6),
+            (y+3,x+2),(y+3, x+4),
+            (y+4, x+2),(y+4, x +4),(y+4, x+5),(y+4, x +6)
+]
+
+
+
+############################
 for r in range(height):
 
     for c in range(width):
@@ -73,12 +87,25 @@ for r in range(height):
         if direction:
             chosen = random.choice(direction)
             if chosen == 'N':
-                maze[r][c].n = 0
-                maze[r - 1][c].s = 0
+                if(r,c) not in blocK_42 and (r -1, c) not in blocK_42:
+                    maze[r][c].n = 0
+                    maze[r - 1][c].s = 0
             elif chosen == 'E':
-                maze[r][c].e = 0
-                maze[r][c + 1].w = 0
+                if(r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
+                    maze[r][c].e = 0
+                    maze[r][c + 1].w = 0
 
+
+
+
+
+#for r in range(center_r, center_r + block_height):
+#    for c in range(center_c, center_c + block_width):
+#        maze[r][c].n = 1
+#        maze[r][c].e = 1
+#        maze[r][c].s = 1
+#        maze[r][c].w = 1
+#        maze[r][c].blocK_42 = True
 
 
 """
@@ -123,7 +150,7 @@ grid1.append(bottom_row)
 for i in grid1:
      print("".join(i))
 """
-"""
+
 grid1 = []
 
 for r in range(height):
@@ -139,7 +166,9 @@ for r in range(height):
     # Content row
     row = "|"
     for c in range(width):
-        if (r,c) == entry:
+        if(r,c)  in blocK_42:
+            row +="███"
+        elif (r,c) == entry:
             row += " S "
         elif (r,c) == exit_end:
             row += " E "
@@ -152,22 +181,24 @@ for r in range(height):
             row += " "
     grid1.append(row)
 
-# Bottom row
+
 bottom_row = "+"
 for c in range(width):
     bottom_row += "---+"
 grid1.append(bottom_row)
 
-# Print maze
+
 for line in grid1:
     print(line)
+
+
+#################
 """
-
-
 cell_width = 3 
 cell_height = 1 
 
 grid1 = []
+
 
 for r in range(height):
 
@@ -184,7 +215,9 @@ for r in range(height):
     for h in range(cell_height):
         row = "█" 
         for c in range(width):
-            if (r,c) == entry:
+            if(r,c)  in blocK_42:
+                row +="   "
+            elif (r,c) == entry:
                 content = f"{GREEN} ▄ {RESET}"
             elif (r,c) == exit_end:
                 content = f"{RED} ▄ {RESET}"
@@ -208,9 +241,8 @@ grid1.append(bottom_row)
 
 for line in grid1:
     print(line)
+"""
 #################################
-
-
 
 def cell_to_hex(cell):
     value = 0
