@@ -31,6 +31,8 @@ def create_maze(width, height):
     return maze
 
 def create_block_42(width, height):
+    if width <= 8 or height <= 6:
+        return []
     block_height = 5
     block_width = 7
 
@@ -46,31 +48,6 @@ def create_block_42(width, height):
     ]
 
     return blocK_42
-
-
-def binary_tree(maze, width, height, blocK_42):
-    for r in range(height):
-        for c in range(width):
-
-            direction = []
-
-            if r > 0:
-                direction.append('N')
-            if c < width -1:
-                direction.append('E')
-
-            if direction:
-                chosen = random.choice(direction)
-
-                if chosen == 'N':
-                    if (r,c) not in blocK_42 and (r -1, c) not in blocK_42:
-                        maze[r][c].n = 0
-                        maze[r - 1][c].s = 0
-
-                elif chosen == 'E':
-                    if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
-                        maze[r][c].e = 0
-                        maze[r][c + 1].w = 0
 
 
 def print_maze(maze, width, height, blocK_42, entry, exit_end):
@@ -96,7 +73,7 @@ def print_maze(maze, width, height, blocK_42, entry, exit_end):
             row = "█"  
             for c in range(width):
                 if (r, c) in blocK_42:
-                    content = f"{GREEN}***{RESET}"
+                    content = f"{GREEN}   {RESET}"
                 elif (r, c) == entry:
                     content = f"{GREEN}   {RESET}"
                 elif (r, c) == exit_end:
