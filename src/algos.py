@@ -1,4 +1,5 @@
 import random
+from collections import deque
 
 
 def dfs(maze, width, height, start, block_42):
@@ -61,7 +62,7 @@ def binary_tree(maze, width, height, blocK_42):
                 chosen = random.choice(direction)
 
                 if chosen == 'N':
-                    if (r, c) not in blocK_42 and (r -1, c) not in blocK_42:
+                    if (r, c) not in blocK_42 and (r - 1 , c) not in blocK_42:
                         maze[r][c].n = 0
                         maze[r - 1][c].s = 0
 
@@ -77,44 +78,86 @@ def non_perfect(maze, width, height, blocK_42):
 
     for i in range(extra_break):
 
-            r = random.randint(0, height - 1)
-            c = random.randint(0, width - 1)
+        r = random.randint(0, height - 1)
+        c = random.randint(0, width - 1)
 
-            if (r, c) in blocK_42:
-                continue
+        if (r, c) in blocK_42:
+            continue
 
-            direction = []
+        direction = []
+        if r > 0:
+            direction.append('N')
+        if c < width -1:
+            direction.append('E')
+        if r < height -1:
+            direction.append('S')
+        if c > 0:
+            direction.append('W')
 
-            if r > 0:
-                direction.append('N')
-            if c < width -1:
-                direction.append('E')
-            if r < height -1:
-                direction.append('S')
-            if c > 0:
-                direction.append('W')
+        if not direction:
+            continue
 
-            if not direction:
-                continue
+        chosen = random.choice(direction)
 
-            chosen = random.choice(direction)
+        if chosen == 'N' and (r - 1, c) not in blocK_42:
+            if (r,c) not in blocK_42 and (r -1, c) not in blocK_42:
+                maze[r][c].n = 0
+                maze[r - 1][c].s = 0
 
-            if chosen == 'N' and (r - 1, c) not in blocK_42:
-                if (r,c) not in blocK_42 and (r -1, c) not in blocK_42:
-                    maze[r][c].n = 0
-                    maze[r - 1][c].s = 0
+        elif chosen == 'E' and (r, c + 1) not in blocK_42:
+            if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
+                maze[r][c].e = 0
+                maze[r][c + 1].w = 0
+        elif chosen == 'S' and (r + 1, c) not in blocK_42:
+            if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
+                maze[r][c].s = 0
+                maze[r + 1][c].n = 0
+        elif chosen == 'E' and (r, c - 1) not in blocK_42:
+            if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
+                maze[r][c].w = 0
+                maze[r][c - 1].e = 0
 
-            elif chosen == 'E' and (r, c + 1) not in blocK_42:
-                if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
-                    maze[r][c].e = 0
-                    maze[r][c + 1].w = 0
 
-            elif chosen == 'S' and (r + 1, c) not in blocK_42:
-                if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
-                    maze[r][c].s = 0
-                    maze[r + 1][c].n = 0
+def find_shortest_path_bfs(maze, start, end, width, height, block_42):
+    queue = deque([start])
+    visited = set([start])
+    parent = {}
 
-            elif chosen == 'E' and (r, c - 1) not in blocK_42:
-                if (r,c) not in blocK_42 and (r, c + 1) not in blocK_42:
-                    maze[r][c].w = 0
-                    maze[r][c - 1].e = 0
+    while queue:
+        current = queue.popleft()
+        if current == end:
+            break
+        r, c = current
+        if maze[r][c].n == 0 and (r-1, c) not in visited:
+            if r-1 >= 0:
+                visited.add((r-1, c))
+                parent[(r-1, c)] = current
+                queue.append((r-1, c))
+
+        if maze[r][c].s == 0 and (r+1, c) not in visited:
+            if r+1 < height:
+                visited.add((r+1, c))
+                parent[(r+1, c)] = current
+                queue.append((r+1, c))
+
+        if maze[r][c].e == 0 and (r, c+1) not in visited:
+            if c+1 < width:
+                visited.add((r, c+1))
+                parent[(r, c+1)] = current
+                queue.append((r, c+1))
+
+        if maze[r][c].w == 0 and (r, c-1) not in visited:
+            if c-1 >= 0:
+                visited.add((r, c-1))
+                parent[(r, c-1)] = current
+                queue.append((r, c-1))
+
+    path = []
+    node = end
+    while node in parent:
+        path.append(node)
+        node = parent[node]
+    path.append(start)
+    path.reverse()
+
+    return path

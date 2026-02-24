@@ -1,9 +1,8 @@
 from src.read_config import read_config
 from src.grid import create_maze, create_block_42, print_maze, write_hex_output, write_visual_output
 from src.algos import dfs
-from src.algos import binary_tree, non_perfect
-
-import time
+from src.algos import binary_tree, non_perfect, find_shortest_path_bfs # noqa
+import time # q
 
 
 
@@ -26,7 +25,7 @@ if __name__ == "__main__":
     dfs(maze, width, height, start=entry, block_42=blocK_42)
     #non_perfect(maze, width, height, blocK_42)
     grid1 = print_maze(maze, width, height, blocK_42, entry, exit_end)
-
+    path = find_shortest_path_bfs(maze, entry, exit_end, width, height, blocK_42)
     for line in grid1:
         #time.sleep(0.10)
         print(line)
