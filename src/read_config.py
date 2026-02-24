@@ -41,11 +41,9 @@ def read_config():
             except ValueError:
                 print("Error: 'WIDTH' must be an integer!")
                 exit(1)
-
             if width <= 0:
                 print("Error: 'WIDTH' must be greater than 0!")
                 exit(1)
-
             data["WIDTH"] = width
 
         elif key == "HEIGHT":
@@ -58,25 +56,25 @@ def read_config():
             except ValueError:
                 print("Error: 'HEIGHT' must be an integer!")
                 exit(1)
-
             if height <= 0:
                 print("Error: 'HEIGHT' must be greater than 0!")
                 exit(1)
-
             data["HEIGHT"] = height
+
         elif key in {"ENTRY", "EXIT"}:
             if value == "":
                 print(f"Error: '{key}' coordinates cannot be empty!")
                 exit(1)
-
             parts = value.split(",")
-
             if len(parts) != 2:
                 print(f"Error: '{key}' must contain exactly two numbers!")
                 exit(1)
             try:
                 x = int(parts[0].strip())
                 y = int(parts[1].strip())
+                if x >= data["WIDTH"] or y >= data["HEIGHT"]:
+                    print(f"Error: in '{key}' coordinates {x, y} must be less than 'WIDTH' value")
+                    exit(1)
             except ValueError:
                 print(f"Error: '{key}' coordinates must be integers!")
                 exit(1)

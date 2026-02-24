@@ -13,7 +13,7 @@ if __name__ == "__main__":
     width = config["WIDTH"]
     height = config["HEIGHT"]
     entry = (config["ENTRY"][1],config["ENTRY"][0])
-    exit_end = (config["EXIT"][1],config["EXIT"][0])
+    exit_end = (config["EXIT"][0],config["EXIT"][1])
     out_file = config["OUTPUT_FILE"]
     prefect = True if config["PERFECT"] == "TRUE" else False
 
