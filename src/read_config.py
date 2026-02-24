@@ -74,19 +74,20 @@ def read_config():
             if len(parts) != 2:
                 print(f"Error: '{key}' must contain exactly two numbers!")
                 exit(1)
-
             try:
                 x = int(parts[0].strip())
                 y = int(parts[1].strip())
             except ValueError:
                 print(f"Error: '{key}' coordinates must be integers!")
                 exit(1)
-
             if x < 0 or y < 0:
                 print(f"Error: Negative number in '{key}' coordinates!")
                 exit(1)
-
             data[key] = (x, y)
+            if "ENTRY" in data and "EXIT" in data:
+                if data["ENTRY"] == data["EXIT"]:
+                    print("Error: 'ENTRY' and 'EXIT' must have different coordinate!")
+                    exit(1)
         elif key == "OUTPUT_FILE":
             if value.lower() != "maze.txt":
                 print("Error: 'OUTPUT_FILE' must be 'maze.txt'")

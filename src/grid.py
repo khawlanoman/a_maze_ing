@@ -1,9 +1,10 @@
 from .cell import Cell
 import random
 
-GREEN = "\033[42m"  
-RED = "\033[41m"  
-RESET = "\033[0m" 
+GREEN = "\033[42m"
+RED = "\033[41m"
+RESET = "\033[0m"
+
 
 def create_maze(width, height):
     maze = [[Cell() for c in range(width)] for r in range(height)]
