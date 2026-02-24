@@ -1,18 +1,20 @@
 import random
 
+
 def dfs(maze, width, height, start, block_42):
+    """we need stack to know our path"""
     stack = [start]
+    """we need visited to know the visited cells to don't visit them again"""
     visited = set()
     visited.add(start)
 
     while stack:
         current_r, current_c = stack[-1]
-
         neighbors = []
-        directions = {'N': (-1,0),
-                      'S': (1,0),
-                      'E':(0,1),
-                      'W':(0,-1)}
+        directions = {'N': (-1, 0),
+                      'S': (1, 0),
+                      'E': (0, 1),
+                      'W': (0, -1)}
 
         for direction, (r_offset, c_offset) in directions.items():
             neighbor_r = current_r + r_offset
@@ -24,7 +26,6 @@ def dfs(maze, width, height, start, block_42):
 
         if neighbors:
             direction, (neighbor_r, neighbor_c) = random.choice(neighbors)
-
             if direction == 'N':
                 maze[current_r][current_c].n = 0
                 maze[neighbor_r][neighbor_c].s = 0
