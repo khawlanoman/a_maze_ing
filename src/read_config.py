@@ -13,8 +13,7 @@ def read_config():
     for raw_line in lines:
         line = raw_line.strip()
         if not line or "=" not in line:
-            print("Error: Invalid data in 'config.txt'")
-            exit(1)
+            continue
 
         key, value = line.split("=", 1)
         key = key.strip().upper()
@@ -72,9 +71,10 @@ def read_config():
             try:
                 x = int(parts[0].strip())
                 y = int(parts[1].strip())
-                if x >= data["WIDTH"] or y >= data["HEIGHT"]:
-                    print(f"Error: in '{key}' coordinates {x, y} must be less than 'WIDTH' value")
-                    exit(1)
+                if "WIDTH" in data and "HEIGHT" in data:
+                    if x >= data["WIDTH"] or y >= data["HEIGHT"]:
+                        print(f"Error: in '{key}' coordinates {x, y} must be less than 'WIDTH' value")
+                        exit(1)
             except ValueError:
                 print(f"Error: '{key}' coordinates must be integers!")
                 exit(1)
@@ -87,11 +87,10 @@ def read_config():
                     print("Error: 'ENTRY' and 'EXIT' must have different coordinate!")
                     exit(1)
         elif key == "OUTPUT_FILE":
-            if value.lower() != "maze.txt":
-                print("Error: 'OUTPUT_FILE' must be 'maze.txt'")
+            if len(value) < 1:
+                print("Error: 'OUTPUT_FILE' value is empty!")
                 exit(1)
-
-            data["OUTPUT_FILE"] = "maze.txt"
+            data["OUTPUT_FILE"] = value
         elif key == "PERFECT":
             value = value.upper()
 

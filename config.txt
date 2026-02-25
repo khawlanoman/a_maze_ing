@@ -1,6 +1,15 @@
-WIDTH=9
-HEIGHT=9
-ENTRY=6,1
-EXIT= 7,5
-OUTPUT_FILE=maze.txt
-PERFECT= False
+             
+          
+
+
+            
+
+
+            EXIT     =   7     ,   5
+
+
+        WIDTH     =      9          
+        HEIGHT      =             9
+ENTRY      =    6   ,     1
+OUTPUT_FILE                =           zz
+PERFECT               = False

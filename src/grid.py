@@ -98,8 +98,6 @@ def print_maze(maze, width, height, blocK_42, entry, exit_end):
     return (grid1)
 
 
-
-
 def cell_to_hex(cell):
     value = 0
     value += cell.n * 1
@@ -112,14 +110,14 @@ def cell_to_hex(cell):
 def write_hex_output(maze, width, height):
     file = open("output_maze.txt","w")
     for c in range(height):
-        line =  ""
+        line = ""
         for r in range(width):
             line += cell_to_hex(maze[c][r])
         file.write(line +"\n")
 
 
-def write_visual_output(grid1):
-    with open("maze.txt", "w") as file:
+def write_visual_output(grid1, out_file):
+    with open(out_file, "w") as file:
         for row in grid1:
             file.write(''.join(row))
             file.write('\n')

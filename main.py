@@ -2,9 +2,7 @@ from src.read_config import read_config
 from src.grid import create_maze, create_block_42, print_maze, write_hex_output, write_visual_output
 from src.algos import dfs
 from src.algos import binary_tree, non_perfect, find_shortest_path_bfs # noqa
-import time # q
-
-
+import time # noqa
 
 
 if __name__ == "__main__":
@@ -34,4 +32,4 @@ if __name__ == "__main__":
         print(line)
     write_hex_output(maze, width, height)
 
-    write_visual_output(grid1)
+    write_visual_output(grid1, out_file)
