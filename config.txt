@@ -1,11 +1,8 @@
+###
 
-    gdgd=3f
-
-            EXIT     =   7     ,   5
-
-
-        WIDTH     =      9          
-        HEIGHT      =             9
-ENTRY      =    6   ,     1
-OUTPUT_FILE                =           zz
+WIDTH=10
+HEIGHT=10
+ENTRY=1,8
+EXIT= 0,8
+OUTPUT_FILE=maze.txt
 PERFECT= False

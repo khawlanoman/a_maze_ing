@@ -31,6 +31,7 @@ def dfs(maze, width, height, start, block_42):
                 maze[current_r][current_c].n = 0
                 maze[neighbor_r][neighbor_c].s = 0
 
+
             elif direction == 'S':
                 maze[current_r][current_c].s = 0
                 maze[neighbor_r][neighbor_c].n = 0
@@ -118,6 +119,7 @@ def non_perfect(maze, width, height, blocK_42):
                 maze[r][c - 1].e = 0
 
 
+
 """ this is BFS algorithm for finding the shortest possible way between 'ENTRY' and 'EXIT' """
 def find_shortest_path_bfs(maze, start, end, width, height, block_42):
     queue = deque([start])
@@ -165,4 +167,20 @@ def find_shortest_path_bfs(maze, start, end, width, height, block_42):
 
     path.append(start)
     path.reverse()
-    return path
+    directions = []
+    for i in range(len(path) - 1):
+        r1, c1 = path[i]
+        r2, c2 = path[i + 1]
+
+        if r2 == r1 - 1:
+            directions.append("N")
+        elif r2 == r1 + 1:
+            directions.append("S")
+        elif c2 == c1 + 1:
+            directions.append("E")
+        elif c2 == c1 - 1:
+            directions.append("W")
+
+    return path, directions
+
+    

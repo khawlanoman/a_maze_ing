@@ -1,9 +1,6 @@
-d55539553
-95538457a
-af96efffa
-afc5157fa
-afffafffa
-853fafd52
-abafafffa
-aac3a93d2
-ec56c6c56
+
+4, 8
+
+4, 8
+(9, 5)
+ENNWNNWSWSWSSSSSSESW

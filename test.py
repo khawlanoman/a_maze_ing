@@ -4,6 +4,7 @@ GREEN = '\033[92m'
 RED = '\033[91m'
 RESET = '\033[0m'
 
+
 class Cell:
     def __init__(self):
         self.n = 1
@@ -14,13 +15,10 @@ class Cell:
 
 
 with open("config.txt","r") as file:
-    
-    array= {}
+    array = {}
     for line in file:
         key, value = line.strip().split("=")
         array[key] = value
-
-
 
 for key, value in array.items() :
     if key == "WIDTH":
@@ -53,22 +51,22 @@ for c in range(height):
             cell.w = 1
         if c == width -1:
             cell.e = 1
-        
+
         row.append(cell)
-        
+
     gird_tab.append(row)
 
 ############################
 block_height = 5
 block_width = 7
 
-y =( height // 2) -( block_height // 2)
-x =( width // 2)- (block_width // 2)
-blocK_42 = [(y, x),(y, x + 4),(y, x + 5),(y, x + 6),
-            (y+1,x),(y+1,x + 6),
-            (y+2,x),(y+2,x+1),(y+2,x+2),(y+2,x+4),(y+2,x+5),(y+2,x+ 6),
-            (y+3,x+2),(y+3, x+4),
-            (y+4, x+2),(y+4, x +4),(y+4, x+5),(y+4, x +6)
+y =( height // 2) - ( block_height // 2)
+x =( width // 2) - (block_width // 2)
+blocK_42 = [(y, x),( y, x + 4), (y, x + 5), (y, x + 6),
+            (y + 1 ,x), (y + 1,x + 6),
+            (y+2, x), (y+2, x+1), (y+2, x+2), (y+2, x+4), (y+2 ,x+5), (y+2,x+ 6),
+            (y+3, x+2), (y+3, x+4),
+            (y+4, x + 2), (y + 4, x + 4), (y + 4, x + 5), (y + 4, x + 6)
 ]
 
 
