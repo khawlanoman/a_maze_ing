@@ -11,8 +11,8 @@ if __name__ == "__main__":
     config = read_config()
     width = config["WIDTH"]
     height = config["HEIGHT"]
-    entry = (config["ENTRY"][1],config["ENTRY"][0])
-    exit_end = (config["EXIT"][0],config["EXIT"][1])
+    entry = tuple(config["ENTRY"])
+    exit_end = tuple(config["EXIT"])
     out_file = config["OUTPUT_FILE"]
     prefect = True if config["PERFECT"] == "TRUE" else False
 
@@ -24,8 +24,11 @@ if __name__ == "__main__":
     #if prefect == False:
     dfs(maze, width, height, start=entry, block_42=blocK_42)
     #non_perfect(maze, width, height, blocK_42)
-    grid1 = print_maze(maze, width, height, blocK_42, entry, exit_end)
     path = find_shortest_path_bfs(maze, entry, exit_end, width, height, blocK_42)
+    grid1 = print_maze(maze, width, height, blocK_42, entry, exit_end)
+
+    print("PATH LENGTH:", len(path))
+    print("PATH:", path)
     for line in grid1:
         #time.sleep(0.10)
         print(line)

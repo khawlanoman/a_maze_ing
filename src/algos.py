@@ -118,6 +118,7 @@ def non_perfect(maze, width, height, blocK_42):
                 maze[r][c - 1].e = 0
 
 
+""" this is BFS algorithm for finding the shortest possible way between 'ENTRY' and 'EXIT' """
 def find_shortest_path_bfs(maze, start, end, width, height, block_42):
     queue = deque([start])
     visited = set([start])
@@ -152,12 +153,16 @@ def find_shortest_path_bfs(maze, start, end, width, height, block_42):
                 parent[(r, c-1)] = current
                 queue.append((r, c-1))
 
+    if end not in parent and start != end:
+        return []
+
     path = []
     node = end
-    while node in parent:
+
+    while node != start:
         path.append(node)
         node = parent[node]
+
     path.append(start)
     path.reverse()
-
     return path
