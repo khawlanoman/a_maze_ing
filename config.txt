@@ -1,9 +1,5 @@
-             
-          
 
-
-            
-
+    gdgd=3f
 
             EXIT     =   7     ,   5
 
@@ -12,4 +8,4 @@
         HEIGHT      =             9
 ENTRY      =    6   ,     1
 OUTPUT_FILE                =           zz
-PERFECT               = False
+PERFECT= False

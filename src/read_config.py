@@ -12,9 +12,11 @@ def read_config():
     found_keys = set()
     for raw_line in lines:
         line = raw_line.strip()
-        if not line or "=" not in line:
+        if not line:
             continue
-
+        elif "=" not in line:
+            print("Error: Invalid data in 'config.txt'")
+            exit(1)
         key, value = line.split("=", 1)
         key = key.strip().upper()
         value = value.strip()
