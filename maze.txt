@@ -1,14 +1,14 @@
-9179513953
-ac3c3ac6ba
-a943a857c2
-82faaafffa
-82fec057fa
-aafffafffa
-ec13fafd52
-956afafffa
-853c7c5552
-c545555556
+b915511393
+82a93eaaea
+a842c1447a
+aaf83efffa
+82fec157fa
+86fffafffa
+a953fafd52
+a852fafffa
+c696bc517a
+d545457c56
 
 1, 8
-0, 8
-SENNW
+8, 8
+NESSSSSSSSSWWNE
