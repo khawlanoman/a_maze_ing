@@ -1,14 +1,11 @@
-import random  # noqa
-
-
 # ===================== CELL =====================
 
 class Cell:
     def __init__(self):
         self.n = self.e = self.s = self.w = 1
 
-
 # ===================== MAZE =====================
+
 
 def create_maze(width, height):
     maze = [[Cell() for _ in range(width)] for _ in range(height)]
@@ -17,13 +14,13 @@ def create_maze(width, height):
         for c in range(width):
             cell = maze[r][c]
 
-            if c == 0:
-                cell.n = 1
-            if c == height - 1:
-                cell.s = 1
             if r == 0:
+                cell.n = 1
+            if r == height - 1:
+                cell.s = 1
+            if c == 0:
                 cell.w = 1
-            if r == width - 1:
+            if c == width - 1:
                 cell.e = 1
 
     return maze

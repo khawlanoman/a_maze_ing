@@ -1,7 +1,0 @@
-[tool.poetry]
-name = "a_maze_ing"
-version = "0.1.0"
-description = "Data analysis tool for Matrix data exercice"
-authors = ["sara sarbout, khawla noman"]
-package-mode  = false
-

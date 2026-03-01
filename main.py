@@ -78,12 +78,35 @@ def main(stdscr):
     curses.init_pair(5, curses.COLOR_RED, curses.COLOR_YELLOW)
     curses.init_pair(6, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(7, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
-    curses.init_pair(8, curses.COLOR_CYAN, curses.COLOR_CYAN)
+    curses.init_pair(8, curses.COLOR_CYAN, curses.COLOR_WHITE)
 
-    colors = [1, 2, 3, 4, 5, 6, 7]
+    colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
 
     show_path = True
+
+    # ---------- Design A-maze-ing --------
+    def show_amazeing(stdscr):
+        stdscr.clear()
+
+        art = [
+            " █████╗    ███╗   ███╗ █████╗ ███████╗ ███████╗   ██╗███╗   ██╗ ██████╗ ", # noqa
+            "██╔══██╗   ████╗ ████║██╔══██╗╚══███╔╝ ██╔════╝   ██║████╗  ██║██╔════╝ ", # noqa
+            "███████║   ██╔████╔██║███████║  ███╔╝  █████╗     ██║██╔██╗ ██║██║  ███╗", # noqa
+            "██╔══██║   ██║╚██╔╝██║██╔══██║ ███╔╝   ██╔══╝     ██║██║╚██╗██║██║   ██║",  # noqa
+            "██║  ██║   ██║ ╚═╝ ██║██║  ██║███████  ███████╗   ██║██║ ╚████║╚██████╔╝", # noqa
+            "╚═╝  ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝ ╚══════╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ " # noqa
+        ]
+
+        h, w = stdscr.getmaxyx()
+        start_y = h // 2 - len(art) // 2
+        for i, line in enumerate(art):
+            x = w // 2 - len(line) // 2
+            if 0 <= start_y + i < h:
+                stdscr.addstr(start_y + i, max(0, x), line)
+
+        stdscr.refresh()
+        time.sleep(2)
 
     # ---------- Maze Generation ----------
 
@@ -125,16 +148,19 @@ def main(stdscr):
     blocK_42 = None
     path = []
     moves = 0
-
     generate_maze()
 
     # ---------- Main Loop ----------
-
+    flag = False
     while True:
 
         stdscr.clear()
-
         term_height, term_width = stdscr.getmaxyx()
+
+        if not flag:
+            show_amazeing(stdscr)
+            flag = True
+            stdscr.clear()
 
         grid = print_maze(
             maze,
@@ -162,15 +188,12 @@ def main(stdscr):
         # ---------- Draw Maze ----------
 
         for row, line in enumerate(grid):
-
             if row >= term_height:
                 break
 
             max_x = term_width - 6 - 1
-
             if max_x <= 0:
                 continue
-
             try:
                 stdscr.addstr(
                     row,

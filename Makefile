@@ -1,12 +1,8 @@
 PYTHON = python3
-PIP = pip
 POETRY = poetry
 
-run: install
+run: 
 	$(POETRY) run $(PYTHON) main.py
-
-install:
-	$(POETRY) install
 
 clean: fclean
 	rm -rf __pycache__
