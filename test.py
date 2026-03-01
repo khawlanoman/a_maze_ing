@@ -256,9 +256,9 @@ for line in grid1:
 """
 #################
 
-GREEN = "\033[42m"  
-RED = "\033[41m"  
-RESET = "\033[0m" 
+GREEN = "\033[42m"
+RED = "\033[41m"
+RESET = "\033[0m"
 
 cell_width = 3
 cell_height = 1
@@ -266,7 +266,7 @@ cell_height = 1
 grid1 = []
 
 for r in range(height):
-  
+
     top_row = "█"
     for c in range(width):
         if maze[r][c].n:       
@@ -275,10 +275,8 @@ for r in range(height):
             top_row += " " * cell_width
         top_row += "█"
     grid1.append(top_row)
-
-   
     for h in range(cell_height):
-        row = "█"  
+        row = "█"
         for c in range(width):
             if (r, c) in blocK_42:
                 content = f"{GREEN}***{RESET}"
@@ -288,10 +286,7 @@ for r in range(height):
                 content = f"{RED}   {RESET}"
             else:
                 content = " " * cell_width
-
             row += content
-
-           
             if c == width - 1 or maze[r][c].e:
                 row += "█"
             else:
@@ -308,6 +303,7 @@ grid1.append(bottom_row)
 for line in grid1:
     print(line)
 #################################
+
 
 def cell_to_hex(cell):
     value = 0
