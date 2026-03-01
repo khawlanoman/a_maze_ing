@@ -1,10 +1,6 @@
 from .cell import Cell
 import random # noqa
 
-GREEN = "\033[42m"
-RED = "\033[41m"
-RESET = "\033[0m"
-
 
 def create_maze(width, height):
     maze = [[Cell() for c in range(width)] for r in range(height)]
@@ -55,6 +51,7 @@ def create_block_42(width, height, entry, exit_end):
 
 def print_maze(maze, width, height, blocK_42, entry, exit_end, path):
 
+
     cell_width = 3
     cell_height = 1
     grid1 = []
@@ -101,7 +98,7 @@ def cell_to_hex(cell):
     value += cell.e * 2
     value += cell.s * 4
     value += cell.w * 8
-    return format(value, 'x')
+    return format(value, 'X')
 
 
 def write_hex_output(maze, width, height, out_file, entry, exit_end, moves):
@@ -111,8 +108,8 @@ def write_hex_output(maze, width, height, out_file, entry, exit_end, moves):
             for r in range(width):
                 line += cell_to_hex(maze[c][r])
             file.write(line + "\n")
-        entry_coor = f"{entry[0]}, {entry[1]}"
-        exit_coor = f"{exit_end[0]}, {exit_end[1]}"
+        entry_coor = f"{entry[0]},{entry[1]}"
+        exit_coor = f"{exit_end[0]},{exit_end[1]}"
         moves_as_string = "".join(moves)
         file.write("\n" + entry_coor + "\n")
         file.write(exit_coor + "\n")
