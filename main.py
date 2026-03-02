@@ -83,7 +83,7 @@ def main(stdscr):
     colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
 
-    show_path = True
+    show_path = False
 
     # ---------- Design A-maze-ing --------
     def show_amazeing(stdscr):
@@ -201,6 +201,7 @@ def main(stdscr):
                     line[:max_x],
                     curses.color_pair(maze_color)
                 )
+                
             except curses.error:
                 pass
 
@@ -209,10 +210,10 @@ def main(stdscr):
         menu_y = min(len(grid) + 2, term_height - 3)
 
         try:
-            stdscr.addstr(menu_y, 5, "1. Re-generate a new maze")
-            stdscr.addstr(menu_y, 35, "2. Show / Hide path")
-            stdscr.addstr(menu_y + 1, 5, "3. Rotate maze colors")
-            stdscr.addstr(menu_y + 1, 35, "4. Quit")
+            stdscr.addstr(menu_y, 5, "[1]. Re-generate a new maze")
+            stdscr.addstr(menu_y, 35, "[2]. Show / Hide path")
+            stdscr.addstr(menu_y + 1, 5, "[3]. Rotate maze colors")
+            stdscr.addstr(menu_y + 1, 35, "[4]. Quit")
         except curses.error:
             pass
 
