@@ -2,7 +2,7 @@ class config_exception(Exception):
     pass
 
 
-def read_config():
+def read_config() -> dict:
     required = {"WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"}
     data = {}
 
@@ -30,7 +30,8 @@ def read_config():
                 raise config_exception(f"Unknown key '{key}'")
 
             if key in found_keys:
-                raise config_exception(f"Duplicate key '{key}' in 'config.txt'")
+                raise config_exception(f"Duplicate key '{key}' in "
+                                       f"'config.txt'")
 
             found_keys.add(key)
             if key == "WIDTH":
@@ -42,9 +43,9 @@ def read_config():
                     width = int(value)
                 except ValueError:
                     raise config_exception("'WIDTH' value must be an integer!")
-                    exit(1)
                 if width <= 0:
-                    raise config_exception("'WIDTH' value must be greater than 0!")
+                    raise config_exception("'WIDTH' value must be greater"
+                                           " than 0!")
                 data["WIDTH"] = width
 
             elif key == "HEIGHT":
@@ -61,29 +62,37 @@ def read_config():
 
             elif key in {"ENTRY", "EXIT"}:
                 if value == "":
-                    raise config_exception(f"'{key}' coordinates cannot be empty!")
+                    raise config_exception(f"'{key}' coordinates "
+                                           f"cannot be empty!")
                 parts = value.split(",")
                 if len(parts) != 2:
-                    raise config_exception(f"'{key}' must contain exactly two numbers!")
+                    raise config_exception(f"'{key}' must contain exactly two "
+                                           f"numbers!")
                 try:
                     x = int(parts[0].strip())
                     y = int(parts[1].strip())
                     if "WIDTH" in data and "HEIGHT" in data:
                         if x >= data["WIDTH"] or y >= data["HEIGHT"]:
-                            raise config_exception(f"in '{key}' coordinates {x, y} must be less than 'WIDTH' value")
+                            raise config_exception(f"in '{key}' coordinates "
+                                                   f"{x, y} must be less than "
+                                                   "'WIDTH' value")
                 except ValueError:
-                    raise config_exception(f"'{key}' coordinates must be integers!")
+                    raise config_exception(f"'{key}' coordinates must"
+                                           f" be integers!")
                 if x < 0 or y < 0:
-                    raise config_exception(f"Negative number in '{key}' coordinates!")
+                    raise config_exception(f"Negative number in '{key}'"
+                                           f" coordinates!")
                 data[key] = (x, y)
                 if "ENTRY" in data and "EXIT" in data:
                     if data["ENTRY"] == data["EXIT"]:
-                        raise config_exception("'ENTRY' and 'EXIT' must have different coordinate!")
+                        raise config_exception("'ENTRY' and 'EXIT' must have"
+                                               " different coordinate!")
             elif key == "OUTPUT_FILE":
                 if len(value) < 1:
                     raise config_exception("'OUTPUT_FILE' value is empty!")
                 if not value.endswith(".txt"):
-                    raise config_exception("'OUTPUT_FILE' must have a .txt extension")
+                    raise config_exception("'OUTPUT_FILE' must have a .txt "
+                                           "extension")
                 data["OUTPUT_FILE"] = value
             elif key == "PERFECT":
                 value = value.upper()

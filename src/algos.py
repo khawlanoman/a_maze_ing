@@ -41,10 +41,8 @@ def dfs(maze, width, height, start, block_42):
         for direction, (dr, dc, _, _) in DIRECTIONS.items():
             nr, nc = r + dr, c + dc
 
-            if (0 <= nr < height and
-                0 <= nc < width and
-                (nr, nc) not in visited and
-                (nr, nc) not in block_42):
+            if (0 <= nr < height and 0 <= nc < width
+                    and (nr, nc) not in visited and (nr, nc) not in block_42):
                 neighbors.append(direction)
 
         if neighbors:
@@ -123,9 +121,8 @@ def non_perfect(maze, width, height, block_42):
         for direction, (dr, dc, _, _) in DIRECTIONS.items():
             nr, nc = r + dr, c + dc
 
-            if (0 <= nr < height and
-                0 <= nc < width and
-                (nr, nc) not in block_42):
+            if (0 <= nr < height and 0 <= nc < width
+                and (nr, nc) not in block_42):
                 possible.append(direction)
 
         if possible:

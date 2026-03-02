@@ -1,8 +1,7 @@
 PYTHON = python3
-POETRY = poetry
 
-run: 
-	$(POETRY) run $(PYTHON) main.py
+run:
+	@$(PYTHON) main.py || true
 
 clean: fclean
 	rm -rf __pycache__

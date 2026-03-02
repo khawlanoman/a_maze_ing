@@ -2,10 +2,7 @@
 
 class Cell:
     def __init__(self):
-        self.n = 1
-        self.e = 1
-        self.s = 1
-        self.w = 1
+        self.n = self.e = self.s = self.w = 1
 
 # ===================== MAZE =====================
 
@@ -31,6 +28,7 @@ def create_maze(width, height):
 
 # ===================== 42 BLOCK =====================
 
+
 def create_block_42(width, height, entry, exit_end):
 
     if width <= 8 or height <= 6:
@@ -50,7 +48,7 @@ def create_block_42(width, height, entry, exit_end):
     ]
 
     if entry in block_42 or exit_end in block_42:
-        print("Error: ENTRY or EXIT overlaps 42 block!")
+        print("Error: ENTRY or EXIT exist in 42 block")
         exit(1)
 
     return block_42
@@ -75,13 +73,12 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
         row_line = "█"
 
         for c in range(width):
-
             if (r, c) in block_42:
                 content = "   "
             elif (r, c) == entry:
-                content = " S "
+                content = " s "
             elif (r, c) == exit_end:
-                content = " E "
+                content = " e "
             elif path and (r, c) in path:
                 content = " ➡ "
             else:
