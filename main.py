@@ -1,7 +1,7 @@
 from src.read_config import read_config
 from src.grid import create_maze, create_block_42, print_maze, write_hex_output
 from src.algos import dfs
-from src.algos import binary_tree, non_perfect, find_shortest_path_bfs  # noqa
+from src.algos import non_perfect, find_shortest_path_bfs  # noqa
 import time
 import curses
 import random
@@ -68,7 +68,7 @@ def main(stdscr):
     colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
 
-    show_path = True
+    show_path = False
 
     # ---------- Design A-maze-ing --------
     def show_amazeing(stdscr):
@@ -187,7 +187,7 @@ def main(stdscr):
 
         menu_lines = [
             "[1]. Re-generate a new maze     [2]. Show / Hide path",
-            "[3]. Rotate maze colors          [4]. Quit"
+            "[3]. Rotate maze colors         [4]. Quit"
         ]
 
         for i, line in enumerate(menu_lines):
