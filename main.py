@@ -55,6 +55,7 @@ def main(stdscr):
 
     curses.curs_set(0)
     curses.start_color()
+    curses.use_default_colors() 
 
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
@@ -64,10 +65,13 @@ def main(stdscr):
     curses.init_pair(6, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(7, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
     curses.init_pair(8, curses.COLOR_CYAN, curses.COLOR_WHITE)
-
+    #curses.init_pair(10, curses.COLOR_GREEN, curses.COLOR_MAGENTA)
     colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
-
+    #_, maze_bg = curses.pair_content(maze_color)
+    
+    color_path = 9
+    
     show_path = False
 
     # ---------- Design A-maze-ing --------
@@ -133,7 +137,20 @@ def main(stdscr):
 
         stdscr.clear()
         term_height, term_width = stdscr.getmaxyx()
+        ##################################
+        if maze_color == 1 or maze_color == 2 or maze_color == 6:
+            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_BLACK)
+        elif maze_color == 3:
+            curses.init_pair(9, curses.COLOR_RED, curses.COLOR_GREEN)
+        elif maze_color == 4 or maze_color == 8:
+            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_WHITE)
+        elif maze_color == 5 :
+            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_YELLOW)
+        elif maze_color == 7 :
+            curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_MAGENTA)
 
+           
+        ################################
         if not flag:
             show_amazeing(stdscr)
             flag = True
@@ -180,7 +197,22 @@ def main(stdscr):
                 )
             except curses.error:
                 pass
+            
+            #################
+            if show_path and path:
+                current_x = start_x
+                for char in line:
+                    if current_x >= term_width:
+                        break
 
+                    if char in "•":
+                        try:
+                            stdscr.addstr(row, current_x,'•', curses.color_pair(9))
+                        except curses.error:
+                            pass
+                    current_x += 1
+            #####
+            
         # ---------- Menu ----------
 
         menu_y = min(len(grid) + 2, term_height - 3)

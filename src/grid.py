@@ -80,7 +80,7 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
             elif (r, c) == exit_end:
                 content = " e "
             elif path and (r, c) in path:
-                content = " ➡ "
+                content = " • "
             else:
                 content = " " * cell_width
 
