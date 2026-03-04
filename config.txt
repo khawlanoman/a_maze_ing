@@ -1,8 +1,17 @@
 ###
 
+<<<<<<< HEAD
 WIDTH= 9
 HEIGHT=9
 ENTRY=1,3
 EXIT= 7,1
 OUTPUT_FILE=file
 PERFECT= False
+=======
+WIDTH= 20
+HEIGHT=20
+ENTRY=1,12
+EXIT= 11,1
+OUTPUT_FILE=file.txt
+PERFECT= false
+>>>>>>> f50385a5c0803453e7c219bdac7c6a7989c0340c
