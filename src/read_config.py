@@ -90,9 +90,6 @@ def read_config() -> dict:
             elif key == "OUTPUT_FILE":
                 if len(value) < 1:
                     raise config_exception("'OUTPUT_FILE' value is empty!")
-                if not value.endswith(".txt"):
-                    raise config_exception("'OUTPUT_FILE' must have a .txt "
-                                           "extension")
                 data["OUTPUT_FILE"] = value
             elif key == "PERFECT":
                 value = value.upper()

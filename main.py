@@ -95,7 +95,7 @@ def main(stdscr):
                 stdscr.addstr(start_y + i, max(0, x), line)
 
         stdscr.refresh()
-        time.sleep(2)
+        time.sleep(1)
 
     # ---------- Maze Generation ----------
 
@@ -185,6 +185,7 @@ def main(stdscr):
 
             stdscr.addstr(0, 0, warning[:term_width - 1])
             stdscr.refresh()
+            
             stdscr.getch()
 
             continue
