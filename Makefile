@@ -1,5 +1,5 @@
 PYTHON = python3
-
+POETRY = poetry
 run:
 	@$(PYTHON) main.py || true
 
