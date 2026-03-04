@@ -79,8 +79,8 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
                 content = " S "
             elif (r, c) == exit_end:
                 content = " E "
-            elif path and (r, c) in path:
-                content = " • "
+            #elif path and (r, c) in path:
+            #        content= " * "
             else:
                 content = " " * cell_width
 
@@ -92,8 +92,9 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
     # Bottom wall
     bottom = "█" + ("█" * cell_width + "█") * width
     output.append(bottom)
-
+    
     return output
+
 
 
 # ===================== HEX OUTPUT =====================

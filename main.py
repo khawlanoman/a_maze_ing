@@ -48,7 +48,42 @@ write_hex_output(
     moves
 )
 
+##############################3
+def animate_path(stdscr, path, start_x, entry, exit_end):
 
+    if not path:
+        return
+
+    prev = path[0]
+
+    for current in path[1:]:
+
+        y0, x0 = prev
+        y1, x1 = current
+
+        screen_y0 = y0 * 2 + 1
+        screen_x0 = start_x + (x0 * 4 + 2)
+
+        screen_y1 = y1 * 2 + 1
+        screen_x1 = start_x + (x1 * 4 + 2)
+
+      
+        mid_y = (screen_y0 + screen_y1) // 2
+        mid_x = (screen_x0 + screen_x1) // 2
+
+        try:
+          
+            stdscr.addch(mid_y, mid_x, "•", curses.color_pair(9))
+
+            if (y1, x1) != entry and (y1, x1) != exit_end:
+                stdscr.addch(screen_y1, screen_x1, "•", curses.color_pair(9))
+
+        except curses.error:
+            pass
+
+        #stdscr.refresh()
+        #curses.napms(30)
+        prev = current
 # -------------------- CURSES UI --------------------
 
 def main(stdscr):
@@ -211,12 +246,16 @@ def main(stdscr):
               
                 elif char == "*":      
                     use_color = curses.color_pair(10)
-
-                elif show_path and char == "•":
-                    use_color = curses.color_pair(9)
+                
+                if show_path and path:
+                    animate_path(stdscr, path, start_x, entry, exit_end)
+                    
+                #elif show_path and char == "•":
+                   # use_color = curses.color_pair(9)
                 # 4. Draw the single character
                 try:
                     stdscr.addch(row, current_x, char, use_color)
+
                 except curses.error:
                     pass
         # ---------- Menu ----------
@@ -236,6 +275,9 @@ def main(stdscr):
                 pass
 
         stdscr.refresh()
+       
+        ###################
+    
         key = stdscr.getch()
 
         # ---------- Inputs ----------
