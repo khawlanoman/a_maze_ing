@@ -1,11 +1,9 @@
-from src.read_config import read_config
-from src.grid import create_maze, create_block_42, print_maze, write_hex_output
-from src.algos import dfs
-from src.algos import non_perfect, find_shortest_path_bfs  # noqa
+from mazegen.read_config import read_config
+from mazegen.grid import create_maze, create_block_42, print_maze, write_hex_output
+from mazegen.algos import dfs, non_perfect, find_shortest_path_bfs
 import time
 import curses
 import random
-
 
 # -------------------- CONFIG --------------------
 
@@ -16,8 +14,10 @@ height = config["HEIGHT"]
 entry = tuple(config["ENTRY"])
 exit_end = tuple(config["EXIT"])
 out_file = config["OUTPUT_FILE"]
-perfect = True if config["PERFECT"] == "TRUE" else False
-
+if config["PERFECT"] == "TRUE" or config["PERFECT"] == 1:
+    perfect = True
+elif config["PERFECT"] == "FALSE" or config["PERFECT"] == 0:
+    perfect = False
 
 # -------------------- INITIAL MAZE --------------------
 
