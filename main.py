@@ -65,7 +65,7 @@ def main(stdscr):
     curses.init_pair(6, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(7, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
     curses.init_pair(8, curses.COLOR_CYAN, curses.COLOR_WHITE)
-    #curses.init_pair(10, curses.COLOR_GREEN, curses.COLOR_MAGENTA)
+    
     colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
     #_, maze_bg = curses.pair_content(maze_color)
@@ -140,14 +140,24 @@ def main(stdscr):
         ##################################
         if maze_color == 1 or maze_color == 2 or maze_color == 6:
             curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_BLACK)
+            curses.init_pair(10, curses.COLOR_YELLOW, curses.COLOR_YELLOW)
+            curses.init_pair(11, curses.COLOR_YELLOW, curses.COLOR_BLACK)
         elif maze_color == 3:
             curses.init_pair(9, curses.COLOR_RED, curses.COLOR_GREEN)
+            curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
+            curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_GREEN)
         elif maze_color == 4 or maze_color == 8:
             curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_WHITE)
+            curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
+            curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_WHITE)
         elif maze_color == 5 :
             curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_YELLOW)
+            curses.init_pair(10, curses.COLOR_RED, curses.COLOR_RED)
+            curses.init_pair(11, curses.COLOR_RED, curses.COLOR_YELLOW)
         elif maze_color == 7 :
             curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_MAGENTA)
+            curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
+            curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_MAGENTA)
 
            
         ################################
@@ -179,40 +189,35 @@ def main(stdscr):
 
             continue
 
-        # ---------- Draw Maze ----------
 
+      # ---------- Draw Maze ----------
         for row, line in enumerate(grid):
             if row >= term_height:
                 break
+            
             start_x = max((term_width - len(line)) // 2, 0)
-            max_x = term_width - 6 - 1
-            if max_x <= 0:
-                continue
-            try:
-                stdscr.addstr(
-                    row,
-                    start_x,
-                    line[:max_x],
-                    curses.color_pair(maze_color)
-                )
-            except curses.error:
-                pass
             
-            #################
-            if show_path and path:
-                current_x = start_x
-                for char in line:
-                    if current_x >= term_width:
-                        break
+            for col, char in enumerate(line):
+                current_x = start_x + col
+                if current_x >= term_width - 6: # Stay within bounds
+                    break
 
-                    if char in "•":
-                        try:
-                            stdscr.addstr(row, current_x,'•', curses.color_pair(9))
-                        except curses.error:
-                            pass
-                    current_x += 1
-            #####
-            
+                # 1. Start with the default maze color
+                use_color = curses.color_pair(maze_color)
+
+                if char == "S" or char == "E":     
+                    use_color = curses.color_pair(11)
+              
+                elif char == "*":      
+                    use_color = curses.color_pair(10)
+
+                elif show_path and char == "•":
+                    use_color = curses.color_pair(9)
+                # 4. Draw the single character
+                try:
+                    stdscr.addch(row, current_x, char, use_color)
+                except curses.error:
+                    pass
         # ---------- Menu ----------
 
         menu_y = min(len(grid) + 2, term_height - 3)

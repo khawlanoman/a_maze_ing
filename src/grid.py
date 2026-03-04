@@ -74,11 +74,11 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
 
         for c in range(width):
             if (r, c) in block_42:
-                content = "   "
+                content = "***"
             elif (r, c) == entry:
-                content = " s "
+                content = " S "
             elif (r, c) == exit_end:
-                content = " e "
+                content = " E "
             elif path and (r, c) in path:
                 content = " • "
             else:
