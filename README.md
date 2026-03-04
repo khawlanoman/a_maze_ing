@@ -1,3 +1,4 @@
+# This project has been created as part of 42 curriculum by `sasarbou` and `khnoman`
 # 🗺️A-Maze-ing
 ### 📌 Description:
 #### A maze project is a program that generates and solves a grid-based maze. It reads configuration settings and creates a structured path between an entry and an exit point. The goal is to find a valid route through the maze and display the solution clearly.

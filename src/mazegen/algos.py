@@ -54,9 +54,12 @@ def dfs(maze, width, height, start, block_42):
         else:
             stack.pop()
 
+
 # ==========================================================
 # MAKE MAZE NON-PERFECT (Add Extra Openings)
 # ==========================================================
+
+
 def non_perfect(maze, width, height, block_42):
 
     extra_break = (width * height) // 3
