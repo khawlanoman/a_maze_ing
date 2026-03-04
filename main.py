@@ -168,6 +168,7 @@ def main(stdscr):
 
     # ---------- Main Loop ----------
     flag = False
+    flag1 = False
     while True:
 
         stdscr.clear()
@@ -227,6 +228,7 @@ def main(stdscr):
 
 
       # ---------- Draw Maze ----------
+        
         for row, line in enumerate(grid):
             if row >= term_height:
                 break
@@ -258,8 +260,12 @@ def main(stdscr):
 
                 except curses.error:
                     pass
-        # ---------- Menu ----------
 
+                if not flag1:
+                    stdscr.refresh()
+                    curses.napms(3)
+        # ---------- Menu ----------
+        flag1 = True
         menu_y = min(len(grid) + 2, term_height - 3)
 
         menu_lines = [
