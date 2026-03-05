@@ -1,9 +1,9 @@
 from mazegen.read_config import read_config
-from MazeGenerator import MazeGenerator
+from mazegen.MazeGenerator import MazeGenerator
 import time
 import curses
 import random
-
+import sys
 # -------------------- Path Animation --------------------
 
 def animate_path(stdscr, path, start_x, entry, exit_end):
@@ -31,7 +31,14 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
         prev = current
 
 # -------------------- Main Curses UI --------------------
-
+try:
+        config = read_config()
+        maze_gen = MazeGenerator(config)
+        maze_gen.generate_maze()
+except Exception as e:
+        print(f"[ERROR] {e}")
+        sys.exit(1)
+    
 def main(stdscr):
 
     curses.curs_set(0)
@@ -56,9 +63,9 @@ def main(stdscr):
     flag1 = False
 
     # Load config and initialize MazeGenerator
-    config = read_config()
-    maze_gen = MazeGenerator(config)
-    maze_gen.generate_maze()
+   
+
+   
 
     # ---------- A-maze-ing Logo ----------
     def show_amazeing(stdscr):

@@ -3,8 +3,8 @@ name = "mazegen"
 version = "1.0.0"
 description = "Maze generator and solver reusable module."
 authors = [
-    { name = "khawla noman" },
-    { name = "sara sarbou" }
+    { name = "khnoman" },
+    { name = "sasarbou" }
 ]
 requires-python = ">=3.10"
 

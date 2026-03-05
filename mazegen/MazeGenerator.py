@@ -1,14 +1,14 @@
-from mazegen.grid import create_maze, create_block_42, print_maze, write_hex_output
-from mazegen.algos import dfs, non_perfect, find_shortest_path_bfs
+from .grid import create_maze, create_block_42, print_maze, write_hex_output
+from .algos import dfs, non_perfect, find_shortest_path_bfs
 
 class MazeGenerator:
     def __init__(self, config):
-        self.width = config["WIDTH"]
-        self.height = config["HEIGHT"]
+        self.width = int(config["WIDTH"])
+        self.height = int(config["HEIGHT"])
         self.entry = tuple(config["ENTRY"])
         self.exit_end = tuple(config["EXIT"])
         self.out_file = config["OUTPUT_FILE"]
-        self.perfect = config["PERFECT"] in ["TRUE", 1]
+        self.perfect = str(config["PERFECT"]) in ["TRUE", 1]
 
         self.maze = None
         self.block_42 = None

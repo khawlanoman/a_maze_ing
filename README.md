@@ -43,6 +43,18 @@ It allows drawing the maze and updating the screen dynamically.
 
 
 ### 📂 Project Structure:
+        a_maze_ing_project/
+      ├── mazegen/
+      │   ├── algos.py
+      │   ├── grid.py
+      │   ├── MazeGenerator.py
+      │   └── read_config.py
+      ├── a_maze_ing.py
+      ├── config.txt
+      ├── Makefile
+      ├── pyproject.toml
+      └── README.md
+
 - `Makefile` : The Makefile is used to simplify running and managing the project.
 
 - `config.txt` : The config.txt file contains the configuration settings required to run the maze program.  
@@ -53,11 +65,11 @@ It allows drawing the maze and updating the screen dynamically.
 - **OUTPUT_FILE** – The output file name.
 - **PERFECT** – Maze type (TRUE or FALSE).
 
-- `src/algos.py`: This file contains the main algorithms used in the project, including maze generation and solving techniques such as DFS, BFS, and Binary Tree. It handles the logic of finding paths and processing the maze structure.
+- `mazegen/algos.py`: This file contains the main algorithms used in the project, including maze generation and solving techniques such as DFS, BFS, and Binary Tree. It handles the logic of finding paths and processing the maze structure.
 
-- `src/grid.py`: This file contains the main maze structure and display logic. It is responsible for creating the grid, generating special blocks, printing the maze in the terminal, converting cells to hexadecimal format, and writing the final output to a file.
-- `src/read_config.py`: This function reads and parses the config.txt file. It validates all required keys and their values, checks for errors such as missing, duplicate, or invalid data, and raises a config_exception when an error is detected. It returns a dictionary containing the validated configuration settings.
-- `main`: This is the main entry point of the project. It loads the configuration, initializes the maze, calls the generation and solving algorithms, handles user interaction (if using curses), and coordinates all components of the program.
+- `mazegen/grid.py`: This file contains the main maze structure and display logic. It is responsible for creating the grid, generating special blocks, printing the maze in the terminal, converting cells to hexadecimal format, and writing the final output to a file.
+- `mazegen/read_config.py`: This function reads and parses the config.txt file. It validates all required keys and their values, checks for errors such as missing, duplicate, or invalid data, and raises a config_exception when an error is detected. It returns a dictionary containing the validated configuration settings.
+- `a_maze_ing.py`: This is the main entry point of the project. It loads the configuration, initializes the maze, calls the generation and solving algorithms, handles user interaction (if using curses), and coordinates all components of the program.
 
 ### Resources
 
@@ -76,7 +88,7 @@ Here are the external resources we used to understand and implement the algorith
   https://docs.python.org/3/howto/curses.html
 
 ### 👥 The Team and Poject Management:
-#### Khawla's Roles:   
+#### khnoman's Roles:   
 - DFS algorithm for  Creates Perfect Mazes.
 - grid generator with 42 obstacle.
 - make maze NON-PERFECT (Add Extra Openings).
@@ -86,12 +98,13 @@ Here are the external resources we used to understand and implement the algorith
 - Main program integration and coordination.
 - Testing & Debugging.
 - Performance Optimization.
-#### Sara's Roles:
+#### sasarbou's Roles:
 - BFS alorithm for finding the shortest path between Entry and Exit.
 - parsing of `config.txt` file.
 - `Makefile` file.
 - Code organization into reusable modules(packaging).
 - `README.md` file.
+- Animation & Visualization.
 - Testing & Debugging.
 - Performance Optimization.
 - Main program integration and coordination.
