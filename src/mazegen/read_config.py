@@ -94,7 +94,9 @@ def read_config() -> dict:
             elif key == "PERFECT":
                 value = value.upper()
                 if value not in {"TRUE", "FALSE", "0", "1"}:
-                    raise config_exception("'PERFECT' must be 'TRUE/FALSE' '1/0'")
+                    raise config_exception(
+                        "'PERFECT' must be 'TRUE/FALSE' '1/0'"
+                        )
                 data["PERFECT"] = value
         missing = required - found_keys
         if missing:

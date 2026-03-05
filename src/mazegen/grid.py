@@ -66,7 +66,9 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
         # Top wall
         top = "█"
         for c in range(width):
-            top += ("█" * cell_width if maze[r][c].n else " " * cell_width) + "█"
+            top += (
+                "█" * cell_width if maze[r][c].n else " " * cell_width
+            ) + "█"
         output.append(top)
 
         # Cell content
@@ -79,7 +81,7 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
                 content = " S "
             elif (r, c) == exit_end:
                 content = " E "
-            #elif path and (r, c) in path:
+            # elif path and (r, c) in path:
             #        content= " * "
             else:
                 content = " " * cell_width
@@ -92,9 +94,8 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path):
     # Bottom wall
     bottom = "█" + ("█" * cell_width + "█") * width
     output.append(bottom)
-    
-    return output
 
+    return output
 
 
 # ===================== HEX OUTPUT =====================
@@ -114,7 +115,8 @@ def write_hex_output(maze, width, height, out_file, entry, exit_end, moves):
     with open(out_file, "w") as f:
 
         for r in range(height):
-            f.write("".join(cell_to_hex(maze[r][c]) for c in range(width)) + "\n")
+            row = "".join(cell_to_hex(maze[r][c]) for c in range(width))
+            f.write(row + "\n")
 
         f.write(f"\n{entry[0]},{entry[1]}\n")
         f.write(f"{exit_end[0]},{exit_end[1]}\n")

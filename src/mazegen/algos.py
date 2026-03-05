@@ -17,7 +17,7 @@ DIRECTIONS = {
 # ==========================================================
 # HELPER: Break wall between two cells
 # ==========================================================
-def break_wall(maze, r, c, direction):
+def break_wall(maze, r, c, direction) -> int:
     dr, dc, wall, opposite = DIRECTIONS[direction]
     nr, nc = r + dr, c + dc
 
@@ -30,7 +30,7 @@ def break_wall(maze, r, c, direction):
 # ==========================================================
 # DFS MAZE GENERATION (Perfect Maze)
 # ==========================================================
-def dfs(maze, width, height, start, block_42):
+def dfs(maze, width, height, start, block_42) -> None:
     stack = [start]
     visited = {start}
 
@@ -59,8 +59,7 @@ def dfs(maze, width, height, start, block_42):
 # MAKE MAZE NON-PERFECT (Add Extra Openings)
 # ==========================================================
 
-
-def non_perfect(maze, width, height, block_42):
+def non_perfect(maze, width, height, block_42) -> None:
 
     extra_break = (width * height) // 3
 
@@ -77,8 +76,8 @@ def non_perfect(maze, width, height, block_42):
         for direction, (dr, dc, _, _) in DIRECTIONS.items():
             nr, nc = r + dr, c + dc
 
-            if (0 <= nr < height and 0 <= nc < width
-                and (nr, nc) not in block_42):
+            if (0 <= nr < height and 0 <= nc < width and
+                    (nr, nc) not in block_42):
                 possible.append(direction)
 
         if possible:
@@ -89,7 +88,7 @@ def non_perfect(maze, width, height, block_42):
 # ==========================================================
 # BFS – SHORTEST PATH
 # ==========================================================
-def find_shortest_path_bfs(maze, start, end, width, height, block_42):
+def find_shortest_path_bfs(maze, start, end, width, height, block_42) -> list:
 
     queue = deque([start])
     visited = {start}
@@ -108,10 +107,8 @@ def find_shortest_path_bfs(maze, start, end, width, height, block_42):
             if getattr(maze[r][c], wall) == 0:
                 nr, nc = r + dr, c + dc
 
-                if (0 <= nr < height and
-                    0 <= nc < width and
-                    (nr, nc) not in visited and
-                    (nr, nc) not in block_42):
+                if (0 <= nr < height and 0 <= nc < width and
+                        (nr, nc) not in visited and (nr, nc) not in block_42):
 
                     visited.add((nr, nc))
                     parent[(nr, nc)] = current

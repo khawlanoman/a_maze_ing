@@ -1,5 +1,6 @@
 from src.mazegen.read_config import read_config
-from src.mazegen.grid import create_maze, create_block_42, print_maze, write_hex_output
+from src.mazegen.grid import create_maze, create_block_42
+from src.mazegen.grid import print_maze, write_hex_output
 from src.mazegen.algos import dfs, non_perfect, find_shortest_path_bfs
 import time
 import curses
@@ -48,8 +49,10 @@ write_hex_output(
     moves
 )
 
-##############################3
-def animate_path(stdscr, path, start_x, entry, exit_end):
+# -------path animation-------
+
+
+def animate_path(stdscr, path, start_x, entry, exit_end) -> None:
 
     if not path:
         return
@@ -57,22 +60,17 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
     prev = path[0]
 
     for current in path[1:]:
-
         y0, x0 = prev
         y1, x1 = current
-
         screen_y0 = y0 * 2 + 1
         screen_x0 = start_x + (x0 * 4 + 2)
-
         screen_y1 = y1 * 2 + 1
         screen_x1 = start_x + (x1 * 4 + 2)
-
-      
         mid_y = (screen_y0 + screen_y1) // 2
         mid_x = (screen_x0 + screen_x1) // 2
 
         try:
-          
+
             stdscr.addch(mid_y, mid_x, "•", curses.color_pair(9))
 
             if (y1, x1) != entry and (y1, x1) != exit_end:
@@ -81,16 +79,16 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
         except curses.error:
             pass
 
-        #stdscr.refresh()
-        #curses.napms(30)
+        # stdscr.refresh()
+        # curses.napms(30)
         prev = current
-# -------------------- CURSES UI --------------------
 
-def main(stdscr):
+
+def main(stdscr) -> None:
 
     curses.curs_set(0)
     curses.start_color()
-    curses.use_default_colors() 
+    curses.use_default_colors()
 
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
@@ -100,17 +98,15 @@ def main(stdscr):
     curses.init_pair(6, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(7, curses.COLOR_WHITE, curses.COLOR_MAGENTA)
     curses.init_pair(8, curses.COLOR_CYAN, curses.COLOR_WHITE)
-    
+
     colors = [1, 2, 3, 4, 5, 6, 7, 8]
     maze_color = random.choice(colors)
-    #_, maze_bg = curses.pair_content(maze_color)
-    
-    color_path = 9
-    
+    # _, maze_bg = curses.pair_content(maze_color)
+
     show_path = False
 
     # ---------- Design A-maze-ing --------
-    def show_amazeing(stdscr):
+    def show_amazeing(stdscr) -> None:
         stdscr.clear()
 
         art = [
@@ -134,10 +130,9 @@ def main(stdscr):
 
     # ---------- Maze Generation ----------
 
-    def generate_maze():
+    def generate_maze() -> None:
 
         nonlocal maze, blocK_42, path, moves
-
         maze = create_maze(width, height)
 
         blocK_42 = create_block_42(width, height, entry, exit_end)
@@ -173,9 +168,9 @@ def main(stdscr):
 
         stdscr.clear()
         term_height, term_width = stdscr.getmaxyx()
-        ##################################
+        # #################################
         if maze_color == 1 or maze_color == 2 or maze_color == 6:
-            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_BLACK)
+            curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_BLACK)
             curses.init_pair(10, curses.COLOR_YELLOW, curses.COLOR_YELLOW)
             curses.init_pair(11, curses.COLOR_YELLOW, curses.COLOR_BLACK)
         elif maze_color == 3:
@@ -183,20 +178,19 @@ def main(stdscr):
             curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
             curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_GREEN)
         elif maze_color == 4 or maze_color == 8:
-            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_WHITE)
+            curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_WHITE)
             curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
             curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_WHITE)
-        elif maze_color == 5 :
-            curses.init_pair(9, curses.COLOR_GREEN,curses.COLOR_YELLOW)
+        elif maze_color == 5:
+            curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_YELLOW)
             curses.init_pair(10, curses.COLOR_RED, curses.COLOR_RED)
             curses.init_pair(11, curses.COLOR_RED, curses.COLOR_YELLOW)
-        elif maze_color == 7 :
+        elif maze_color == 7:
             curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_MAGENTA)
             curses.init_pair(10, curses.COLOR_BLACK, curses.COLOR_BLACK)
             curses.init_pair(11, curses.COLOR_BLACK, curses.COLOR_MAGENTA)
 
-           
-        ################################
+        # ---------Show the A-maze-ing design----------------
         if not flag:
             show_amazeing(stdscr)
             flag = True
@@ -221,40 +215,36 @@ def main(stdscr):
 
             stdscr.addstr(0, 0, warning[:term_width - 1])
             stdscr.refresh()
-            
+
             stdscr.getch()
 
             continue
 
+    # ---------- Draw Maze ----------
 
-      # ---------- Draw Maze ----------
-        
         for row, line in enumerate(grid):
             if row >= term_height:
                 break
-            
+
             start_x = max((term_width - len(line)) // 2, 0)
-            
+
             for col, char in enumerate(line):
                 current_x = start_x + col
-                if current_x >= term_width - 6: # Stay within bounds
+                if current_x >= term_width - 6:  # Stay within bounds
                     break
 
                 # 1. Start with the default maze color
                 use_color = curses.color_pair(maze_color)
 
-                if char == "S" or char == "E":     
+                if char == "S" or char == "E":
                     use_color = curses.color_pair(11)
-              
-                elif char == "*":      
+
+                elif char == "*":
                     use_color = curses.color_pair(10)
-                
+
                 if show_path and path:
                     animate_path(stdscr, path, start_x, entry, exit_end)
-                    
-                #elif show_path and char == "•":
-                   # use_color = curses.color_pair(9)
-                # 4. Draw the single character
+
                 try:
                     stdscr.addch(row, current_x, char, use_color)
 
@@ -273,17 +263,15 @@ def main(stdscr):
             "[3]. Rotate maze colors         [4]. Quit"
         ]
 
+    # -----------center horizontally---------
         for i, line in enumerate(menu_lines):
-            start_x = max((term_width - len(line)) // 2, 0)  # center horizontally
+            start_x = max((term_width - len(line)) // 2, 0)
             try:
                 stdscr.addstr(menu_y + i, start_x, line)
             except curses.error:
                 pass
 
         stdscr.refresh()
-
-        ###################
-
         key = stdscr.getch()
 
         # ---------- Inputs ----------

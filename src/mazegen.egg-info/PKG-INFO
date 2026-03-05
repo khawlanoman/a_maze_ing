@@ -1,6 +1,0 @@
-Metadata-Version: 2.4
-Name: mazegen
-Version: 1.0.0
-Summary: Maze generator and solver reusable module.
-Author: khawla, sara
-Requires-Python: >=3.10
