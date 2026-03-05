@@ -19,7 +19,8 @@ DIRECTIONS = {
 # ==========================================================
 def break_wall(maze, r, c, direction) -> int:
     dr, dc, wall, opposite = DIRECTIONS[direction]
-    nr, nc = r + dr, c + dc
+    nr = r + dr
+    nc = c + dc
 
     setattr(maze[r][c], wall, 0)
     setattr(maze[nr][nc], opposite, 0)
@@ -39,7 +40,8 @@ def dfs(maze, width, height, start, block_42) -> None:
         neighbors = []
 
         for direction, (dr, dc, _, _) in DIRECTIONS.items():
-            nr, nc = r + dr, c + dc
+            nr = r + dr
+            nc = c + dc
 
             if (0 <= nr < height and 0 <= nc < width
                     and (nr, nc) not in visited and (nr, nc) not in block_42):
@@ -74,7 +76,8 @@ def non_perfect(maze, width, height, block_42) -> None:
         possible = []
 
         for direction, (dr, dc, _, _) in DIRECTIONS.items():
-            nr, nc = r + dr, c + dc
+            nr = r + dr
+            nc = c + dc
 
             if (0 <= nr < height and 0 <= nc < width and
                     (nr, nc) not in block_42):
