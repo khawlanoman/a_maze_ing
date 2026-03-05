@@ -37,7 +37,7 @@ try:
     maze_gen = MazeGenerator(config)
     maze_gen.generate_maze()
 except Exception as e:
-    print(f"[ERROR] {e}")
+    print(f"[ERROR]: {e}")
     sys.exit(1)
 
 
