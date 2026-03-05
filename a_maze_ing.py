@@ -1,4 +1,4 @@
-from src.mazegen.read_config import read_config
+from mazegen.read_config import read_config
 from MazeGenerator import MazeGenerator
 import time
 import curses

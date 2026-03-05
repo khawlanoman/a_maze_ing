@@ -1,5 +1,6 @@
-from src.mazegen.grid import create_maze, create_block_42, print_maze, write_hex_output
-from src.mazegen.algos import dfs, non_perfect, find_shortest_path_bfs
+from mazegen.grid import create_maze, create_block_42, print_maze, write_hex_output
+from mazegen.algos import dfs, non_perfect, find_shortest_path_bfs
+
 class MazeGenerator:
     def __init__(self, config):
         self.width = config["WIDTH"]
