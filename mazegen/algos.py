@@ -118,7 +118,7 @@ def find_shortest_path_bfs(maze, start, end, width, height, block_42) -> list:
                     queue.append((nr, nc))
 
     if start != end and end not in parent:
-        return [], []
+        return []
 
     # Reconstruct path
     path = []
