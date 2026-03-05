@@ -1,24 +1,7 @@
-###
 
 WIDTH= 9
 HEIGHT=9
 ENTRY=1,3
 EXIT= 7,1
 OUTPUT_FILE=file
-<<<<<<< HEAD
 PERFECT= False
-=======
-PERFECT= False
-=======
-WIDTH= 20
-HEIGHT=20
-ENTRY=1,2
-EXIT= 11,19
-OUTPUT_FILE=file.txt
-<<<<<<< HEAD
-PERFECT= true
-=======
-PERFECT= false
->>>>>>> f50385a5c0803453e7c219bdac7c6a7989c0340c
->>>>>>> 6a17214368dc3d574169f8912242895dcf7e5077
->>>>>>> a05f9cd5c1840aacf0b46583ee382b05cf48296b

@@ -1,6 +1,7 @@
-[tool.poetry.name]
-name = "mazegen"
-authors = ["khawla", "sara"]
+[project]
+name = "a-maze-ing"
 version = "0.1.0"
 
-[poetry.dependencies]
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
