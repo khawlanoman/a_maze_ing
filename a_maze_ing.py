@@ -16,7 +16,7 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
         y0, x0 = prev
         y1, x1 = current
         screen_y0 = y0 * 2 + 1
-        sc;reen_x0 = start_x + (x0 * 4 + 2)
+        screen_x0 = start_x + (x0 * 4 + 2)
         screen_y1 = y1 * 2 + 1
         screen_x1 = start_x + (x1 * 4 + 2)
         mid_y = (screen_y0 + screen_y1) // 2
@@ -63,6 +63,7 @@ def main(stdscr):
     flag = False
     flag1 = False
     # ---------- A-maze-ing Logo ----------
+
     def show_amazeing(stdscr):
         stdscr.clear()
         art = [
@@ -135,7 +136,7 @@ def main(stdscr):
                     use_color = curses.color_pair(10)
                 if show_path and maze_gen.path:
                     animate_path(stdscr, maze_gen.path, start_x,
-                                maze_gen.entry, maze_gen.exit_end)
+                                 maze_gen.entry, maze_gen.exit_end)
                 try:
                     stdscr.addch(row, current_x, char, use_color)
                 except curses.error:
@@ -173,7 +174,6 @@ def main(stdscr):
             break
 
 
-    
 # -------------------- RUN PROGRAM --------------------
 
 try:

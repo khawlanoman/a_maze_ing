@@ -60,6 +60,7 @@ def dfs(maze, width, height, start, block_42) -> None:
 # MAKE MAZE NON-PERFECT (Add Extra Openings)
 # ==========================================================
 
+
 def non_perfect(maze, width, height, block_42) -> None:
 
     extra_break = (width * height) // 3

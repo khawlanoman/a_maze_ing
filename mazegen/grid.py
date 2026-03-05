@@ -9,6 +9,7 @@ class Cell:
 
 # ===================== MAZE =====================
 
+
 def create_maze(width, height):
     maze = [[Cell() for _ in range(width)] for _ in range(height)]
 
