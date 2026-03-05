@@ -16,7 +16,7 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
         y0, x0 = prev
         y1, x1 = current
         screen_y0 = y0 * 2 + 1
-        screen_x0 = start_x + (x0 * 4 + 2)
+        sc;reen_x0 = start_x + (x0 * 4 + 2)
         screen_y1 = y1 * 2 + 1
         screen_x1 = start_x + (x1 * 4 + 2)
         mid_y = (screen_y0 + screen_y1) // 2
@@ -41,7 +41,7 @@ except Exception as e:
     sys.exit(1)
 
 
-# -------------------- Main Curses UI --------------------
+# -------------------- Main Curses UI ------------;--------
 
 def main(stdscr):
 
