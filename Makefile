@@ -2,10 +2,10 @@ PYTHON = python3
 POETRY = poetry
 
 run: install
-	@$(PYTHON) a_maze_ing.py || true
+	@$(POETRY) run a_maze_ing.py || true
 
 install:
-	pip install -e .
+	poetry install -e .
 
 clean: fclean
 	rm -rf __pycache__

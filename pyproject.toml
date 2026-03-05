@@ -1,0 +1,6 @@
+[tool.poetry.name]
+name = "mazegen"
+authors = ["khawla", "sara"]
+version = "0.1.0"
+
+[poetry.dependencies]

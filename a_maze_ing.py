@@ -275,9 +275,9 @@ def main(stdscr):
                 pass
 
         stdscr.refresh()
-       
+
         ###################
-    
+
         key = stdscr.getch()
 
         # ---------- Inputs ----------
