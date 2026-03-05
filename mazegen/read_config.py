@@ -102,5 +102,5 @@ def read_config() -> dict:
         if missing:
             raise config_exception(f"Missing key(s): {', '.join(missing)}")
     except config_exception as e:
-            raise e
+        raise e
     return data

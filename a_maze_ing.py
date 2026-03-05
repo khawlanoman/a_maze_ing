@@ -4,8 +4,9 @@ import time
 import curses
 import random
 import sys
-# -------------------- Path Animation --------------------
 
+
+# -------------------- Path Animation --------------------
 def animate_path(stdscr, path, start_x, entry, exit_end):
     if not path:
         return
@@ -30,15 +31,17 @@ def animate_path(stdscr, path, start_x, entry, exit_end):
 
         prev = current
 
-# -------------------- Main Curses UI --------------------
+
 try:
-        config = read_config()
-        maze_gen = MazeGenerator(config)
-        maze_gen.generate_maze()
+    config = read_config()
+    maze_gen = MazeGenerator(config)
+    maze_gen.generate_maze()
 except Exception as e:
-        print(f"[ERROR] {e}")
-        sys.exit(1)
-    
+    print(f"[ERROR] {e}")
+    sys.exit(1)
+
+
+# -------------------- Main Curses UI --------------------
 def main(stdscr):
 
     curses.curs_set(0)
@@ -62,21 +65,16 @@ def main(stdscr):
     flag = False
     flag1 = False
 
-    # Load config and initialize MazeGenerator
-   
-
-   
-
     # ---------- A-maze-ing Logo ----------
     def show_amazeing(stdscr):
         stdscr.clear()
         art = [
-            " █████╗    ███╗   ███╗ █████╗ ███████╗ ███████╗   ██╗███╗   ██╗ ██████╗ ",
-            "██╔══██╗   ████╗ ████║██╔══██╗╚══███╔╝ ██╔════╝   ██║████╗  ██║██╔════╝ ",
-            "███████║   ██╔████╔██║███████║  ███╔╝  █████╗     ██║██╔██╗ ██║██║  ███╗",
-            "██╔══██║   ██║╚██╔╝██║██╔══██║ ███╔╝   ██╔══╝     ██║██║╚██╗██║██║   ██║",
-            "██║  ██║   ██║ ╚═╝ ██║██║  ██║███████  ███████╗   ██║██║ ╚████║╚██████╔╝",
-            "╚═╝  ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝ ╚══════╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ "
+            " █████╗    ███╗   ███╗ █████╗ ███████╗ ███████╗   ██╗███╗   ██╗ ██████╗ ", # noqa
+            "██╔══██╗   ████╗ ████║██╔══██╗╚══███╔╝ ██╔════╝   ██║████╗  ██║██╔════╝ ", # noqa
+            "███████║   ██╔████╔██║███████║  ███╔╝  █████╗     ██║██╔██╗ ██║██║  ███╗", # noqa
+            "██╔══██║   ██║╚██╔╝██║██╔══██║ ███╔╝   ██╔══╝     ██║██║╚██╗██║██║   ██║", # noqa
+            "██║  ██║   ██║ ╚═╝ ██║██║  ██║███████  ███████╗   ██║██║ ╚████║╚██████╔╝", # noqa
+            "╚═╝  ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝ ╚══════╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ " # noqa
         ]
         h, w = stdscr.getmaxyx()
         start_y = h // 2 - len(art) // 2
@@ -146,7 +144,8 @@ def main(stdscr):
                 elif char == "*":
                     use_color = curses.color_pair(10)
                 if show_path and maze_gen.path:
-                    animate_path(stdscr, maze_gen.path, start_x, maze_gen.entry, maze_gen.exit_end)
+                    animate_path(stdscr, maze_gen.path, start_x,
+                                 maze_gen.entry, maze_gen.exit_end)
                 try:
                     stdscr.addch(row, current_x, char, use_color)
                 except curses.error:
@@ -184,6 +183,7 @@ def main(stdscr):
             maze_color = new_color
         elif key == ord('4'):
             break
+
 
 # -------------------- RUN PROGRAM --------------------
 curses.wrapper(main)

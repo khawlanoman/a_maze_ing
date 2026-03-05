@@ -1,6 +1,7 @@
 from .grid import create_maze, create_block_42, print_maze, write_hex_output
 from .algos import dfs, non_perfect, find_shortest_path_bfs
 
+
 class MazeGenerator:
     def __init__(self, config):
         self.width = int(config["WIDTH"])
@@ -18,9 +19,11 @@ class MazeGenerator:
     def generate_maze(self):
         """Create a new maze and compute path."""
         self.maze = create_maze(self.width, self.height)
-        self.block_42 = create_block_42(self.width, self.height, self.entry, self.exit_end)
+        self.block_42 = create_block_42(self.width, self.height,
+                                        self.entry, self.exit_end)
 
-        dfs(self.maze, self.width, self.height, start=self.entry, block_42=self.block_42)
+        dfs(self.maze, self.width, self.height,
+            start=self.entry, block_42=self.block_42)
 
         if not self.perfect:
             non_perfect(self.maze, self.width, self.height, self.block_42)
@@ -31,7 +34,8 @@ class MazeGenerator:
     def solve_maze(self):
         """Find the shortest path using BFS."""
         result = find_shortest_path_bfs(
-            self.maze, self.entry, self.exit_end, self.width, self.height, self.block_42
+            self.maze, self.entry, self.exit_end,
+            self.width, self.height, self.block_42
         )
         if result:
             self.path, self.moves = result
