@@ -21,7 +21,7 @@ def read_config(filename: str) -> dict:
             line = raw_line.strip()
             if not line:
                 continue
-            elif "#" in line:
+            elif line.startswith("#"):
                 continue
             elif "=" not in line:
                 raise config_exception("Invalid data in configuration file")
