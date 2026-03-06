@@ -78,7 +78,7 @@ def read_config(filename: str) -> dict:
                         if x >= data["WIDTH"] or y >= data["HEIGHT"]:
                             raise config_exception(f"in '{key}' coordinates "
                                                    f"{y, x} must be less than "
-                                                   "'WIDTH' and 'HEIGHT' value")
+                                                   "'WIDTH' and 'HEIGHT'value")
                 except ValueError:
                     raise config_exception(f"'{key}' coordinates must"
                                            f" be integers!")
