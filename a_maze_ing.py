@@ -178,6 +178,7 @@ def main(stdscr: "window") -> None:
             except curses.error:
                 pass
         stdscr.refresh()
+        """getch wait for the user to press a key"""
         key = stdscr.getch()
         # ---------- Inputs ----------
         if key == ord('1'):
