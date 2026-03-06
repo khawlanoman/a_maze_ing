@@ -19,7 +19,7 @@ class MazeGenerator:
         self.moves: List[str] = []
 
     def generate_maze(self) -> None:
-        """Create a new maze and compute path."""
+        """Create a new maze and compute path"""
         self.maze = create_maze(self.width, self.height)
         self.block_42 = create_block_42(self.width, self.height,
                                         self.entry, self.exit_end)
@@ -35,7 +35,7 @@ class MazeGenerator:
         self.write_output()
 
     def shortest_path(self) -> None:
-        """Find the shortest path using BFS."""
+        """Find the shortest path using BFS"""
         result = find_shortest_path_bfs(
             self.maze, self.entry, self.exit_end,
             self.width, self.height, self.block_42
@@ -57,7 +57,7 @@ class MazeGenerator:
         )
 
     def get_grid(self, show_path: bool = False) -> List:
-        """Return the grid as text for display."""
+        """Return the grid as text for display"""
         return print_maze(
             maze=self.maze,
             width=self.width,

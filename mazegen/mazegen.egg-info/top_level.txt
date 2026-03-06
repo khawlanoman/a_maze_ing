@@ -1,5 +1,0 @@
-MazeGenerator
-__init__
-algos
-grid
-read_config

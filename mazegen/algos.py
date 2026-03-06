@@ -14,11 +14,9 @@ DIRECTIONS = {
 }
 
 
-# ==========================================================
-# HELPER: Break wall between two cells
-# ==========================================================
 def break_wall(maze: List[List[Cell]], r: int,
                c: int, direction: str) -> tuple:
+    """this function Break wall between two cells"""
     dr, dc, wall, opposite = DIRECTIONS[direction]
     nr = r + dr
     nc = c + dc
@@ -29,11 +27,10 @@ def break_wall(maze: List[List[Cell]], r: int,
     return nr, nc
 
 
-# ==========================================================
-# DFS MAZE GENERATION (Perfect Maze)
-# ==========================================================
 def dfs(maze: List[List[Cell]], width: int,
         height: int, start: tuple, block_42: List) -> None:
+    """DFS algorithm to break walls in the maze by exploring
+       the current cell and its neighbors"""
     stack = [start]
     visited = {start}
 
@@ -58,14 +55,10 @@ def dfs(maze: List[List[Cell]], width: int,
         else:
             stack.pop()
 
-# ==========================================================
-# MAKE MAZE NON-PERFECT (Add Extra Openings)
-# ==========================================================
-
 
 def non_perfect(maze: List[List[Cell]], width: int,
                 height: int, block_42: List) -> None:
-
+    """this function  is to break more walls randomly for non perfect maze"""
     extra_break = (width * height) // 3
 
     for _ in range(extra_break):
@@ -97,7 +90,7 @@ def non_perfect(maze: List[List[Cell]], width: int,
 def find_shortest_path_bfs(maze: List[List[Cell]], start: tuple,
                            end: tuple, width: int, height: int,
                            block_42: List) -> tuple:
-
+    """BFS algorithm to find a path from the entry to the exit of the maze."""
     queue = deque([start])
     visited = {start}
     parent = {}

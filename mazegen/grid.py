@@ -3,6 +3,7 @@ from typing import List
 
 # ===================== CELL =====================
 class Cell:
+    """Class to represent a maze cell and define its walls"""
     def __init__(self) -> None:
         self.n = 1
         self.e = 1
@@ -13,6 +14,7 @@ class Cell:
 
 
 def create_maze(width: int, height: int) -> list:
+    """ this for create the grid  for the maze"""
     maze = [[Cell() for _ in range(width)] for _ in range(height)]
 
     for r in range(height):
@@ -36,7 +38,8 @@ def create_maze(width: int, height: int) -> list:
 
 def create_block_42(width: int, height: int, entry: tuple,
                     exit_end: tuple) -> list:
-
+    """ this function is for create the block_42 in
+        the maze with its coordinates"""
     if width <= 8 or height <= 6:
         return []
 
@@ -65,7 +68,7 @@ def create_block_42(width: int, height: int, entry: tuple,
 def print_maze(maze: List[List[Cell]], width: int, height: int,
                block_42: List, entry: tuple,
                exit_end: tuple, path: List) -> list:
-
+    """Print the maze for display using curses"""
     cell_width = 3
     output = []
 
@@ -107,6 +110,7 @@ def print_maze(maze: List[List[Cell]], width: int, height: int,
 # ===================== HEX OUTPUT =====================
 
 def cell_to_hex(cell: Cell) -> str:
+    """Convert the Cell to hexadecimal format"""
     return format(
         cell.n * 1 +
         cell.e * 2 +
@@ -119,7 +123,7 @@ def cell_to_hex(cell: Cell) -> str:
 def write_hex_output(maze: List[List[Cell]], width: int, height: int,
                      out_file: str, entry: tuple,
                      exit_end: tuple, moves: List[str]) -> None:
-
+    """Write the maze output to a file"""
     with open(out_file, "w") as f:
 
         for r in range(height):
