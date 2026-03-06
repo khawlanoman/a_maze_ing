@@ -1,10 +1,13 @@
+from typing import Any
+
+
 class config_exception(Exception):
     pass
 
 
 def read_config() -> dict:
     required = {"WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"}
-    data = {}
+    data: dict[str, Any] = {}
 
     try:
         with open("config.txt", "r") as file:

@@ -4,10 +4,12 @@ import time
 import curses
 import random
 import sys
+from typing import List, 
 
 
 # -------------------- Path Animation --------------------
-def animate_path(stdscr, path, start_x, entry, exit_end):
+def animate_path(stdscr: "curses._CursesWindow", path: List[tuple[int, int]],
+                 start_x: int, entry: tuple, exit_end: tuple) -> None:
     if not path:
         return
 

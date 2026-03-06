@@ -1,7 +1,9 @@
-# ===================== CELL =====================
+from typing import List
 
+
+# ===================== CELL =====================
 class Cell:
-    def __init__(self):
+    def __init__(self) -> None:
         self.n = 1
         self.e = 1
         self.s = 1
@@ -10,7 +12,7 @@ class Cell:
 # ===================== MAZE =====================
 
 
-def create_maze(width, height) -> list:
+def create_maze(width: int, height: int) -> list:
     maze = [[Cell() for _ in range(width)] for _ in range(height)]
 
     for r in range(height):
@@ -32,7 +34,8 @@ def create_maze(width, height) -> list:
 # ===================== 42 BLOCK =====================
 
 
-def create_block_42(width, height, entry, exit_end) -> list:
+def create_block_42(width: int, height: int, entry: tuple,
+                    exit_end: tuple) -> list:
 
     if width <= 8 or height <= 6:
         return []
@@ -59,7 +62,9 @@ def create_block_42(width, height, entry, exit_end) -> list:
 
 # ===================== PRINT MAZE =====================
 
-def print_maze(maze, width, height, block_42, entry, exit_end, path) -> list:
+def print_maze(maze: List[List[Cell]], width: int, height: int,
+               block_42: List, entry: tuple,
+               exit_end: tuple, path: List) -> list:
 
     cell_width = 3
     output = []
@@ -103,7 +108,7 @@ def print_maze(maze, width, height, block_42, entry, exit_end, path) -> list:
 
 # ===================== HEX OUTPUT =====================
 
-def cell_to_hex(cell) -> str:
+def cell_to_hex(cell: Cell) -> str:
     return format(
         cell.n * 1 +
         cell.e * 2 +
@@ -113,7 +118,9 @@ def cell_to_hex(cell) -> str:
     )
 
 
-def write_hex_output(maze, width, height, out_file, entry, exit_end, moves):
+def write_hex_output(maze: List[List[Cell]], width: int, height: int,
+                     out_file: str, entry: tuple,
+                     exit_end: tuple, moves: List[str]) -> None:
 
     with open(out_file, "w") as f:
 

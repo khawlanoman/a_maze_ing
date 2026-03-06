@@ -1,7 +1,7 @@
 import random
 from collections import deque
-
-
+from typing import List
+from .grid import Cell
 # ==========================================================
 # CENTRALIZED DIRECTIONS
 # (row_offset, col_offset, current_wall, neighbor_wall)
@@ -17,7 +17,8 @@ DIRECTIONS = {
 # ==========================================================
 # HELPER: Break wall between two cells
 # ==========================================================
-def break_wall(maze, r, c, direction) -> int:
+def break_wall(maze: List[List[Cell]], r: int,
+               c: int, direction: str) -> tuple:
     dr, dc, wall, opposite = DIRECTIONS[direction]
     nr = r + dr
     nc = c + dc
@@ -31,7 +32,8 @@ def break_wall(maze, r, c, direction) -> int:
 # ==========================================================
 # DFS MAZE GENERATION (Perfect Maze)
 # ==========================================================
-def dfs(maze, width, height, start, block_42) -> None:
+def dfs(maze: List[List[Cell]], width: int,
+        height: int, start: tuple, block_42: List) -> None:
     stack = [start]
     visited = {start}
 
@@ -61,7 +63,8 @@ def dfs(maze, width, height, start, block_42) -> None:
 # ==========================================================
 
 
-def non_perfect(maze, width, height, block_42) -> None:
+def non_perfect(maze: List[List[Cell]], width: int,
+                height: int, block_42: List) -> None:
 
     extra_break = (width * height) // 3
 
@@ -91,7 +94,9 @@ def non_perfect(maze, width, height, block_42) -> None:
 # ==========================================================
 # BFS – SHORTEST PATH
 # ==========================================================
-def find_shortest_path_bfs(maze, start, end, width, height, block_42) -> list:
+def find_shortest_path_bfs(maze: List[List[Cell]], start: tuple,
+                           end: tuple, width: int, height: int,
+                           block_42: List) -> tuple:
 
     queue = deque([start])
     visited = {start}
@@ -118,7 +123,7 @@ def find_shortest_path_bfs(maze, start, end, width, height, block_42) -> list:
                     queue.append((nr, nc))
 
     if start != end and end not in parent:
-        return []
+        return ()
 
     # Reconstruct path
     path = []

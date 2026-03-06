@@ -1,9 +1,11 @@
-from .grid import create_maze, create_block_42, print_maze, write_hex_output
+from .grid import create_maze, create_block_42
+from .grid import print_maze, write_hex_output, Cell
 from .algos import dfs, non_perfect, find_shortest_path_bfs
+from typing import List
 
 
 class MazeGenerator:
-    def __init__(self, config):
+    def __init__(self, config: dict) -> None:
         self.width = int(config["WIDTH"])
         self.height = int(config["HEIGHT"])
         self.entry = tuple(config["ENTRY"])
@@ -11,27 +13,28 @@ class MazeGenerator:
         self.out_file = config["OUTPUT_FILE"]
         self.perfect = str(config["PERFECT"]) in ["TRUE", 1]
 
-        self.maze = None
-        self.block_42 = None
-        self.path = []
-        self.moves = 0
+        self.maze: list[list[Cell]]
+        self.block_42: List = []
+        self.path: List[tuple[int, int]] = []
+        self.moves: List[str]
 
-    def generate_maze(self):
+    def generate_maze(self) -> None:
         """Create a new maze and compute path."""
         self.maze = create_maze(self.width, self.height)
         self.block_42 = create_block_42(self.width, self.height,
                                         self.entry, self.exit_end)
 
-        dfs(self.maze, self.width, self.height,
+        dfs(maze=self.maze, width=self.width, height=self.height,
             start=self.entry, block_42=self.block_42)
 
         if not self.perfect:
-            non_perfect(self.maze, self.width, self.height, self.block_42)
+            non_perfect(maze=self.maze, width=self.width,
+                        height=self.height, block_42=self.block_42)
 
         self.solve_maze()
         self.write_output()
 
-    def solve_maze(self):
+    def solve_maze(self) -> None:
         """Find the shortest path using BFS."""
         result = find_shortest_path_bfs(
             self.maze, self.entry, self.exit_end,
@@ -40,27 +43,27 @@ class MazeGenerator:
         if result:
             self.path, self.moves = result
         else:
-            self.path, self.moves = [], 0
+            self.path, self.moves = [], []
 
-    def write_output(self):
+    def write_output(self) -> None:
         write_hex_output(
-            self.maze,
-            self.width,
-            self.height,
-            self.out_file,
-            self.entry,
-            self.exit_end,
-            self.moves
+            maze=self.maze,
+            width=self.width,
+            height=self.height,
+            out_file=self.out_file,
+            entry=self.entry,
+            exit_end=self.exit_end,
+            moves=self.moves
         )
 
-    def get_grid(self, show_path=False):
+    def get_grid(self, show_path: bool = False) -> List:
         """Return the grid as text for display."""
         return print_maze(
-            self.maze,
-            self.width,
-            self.height,
-            self.block_42,
-            self.entry,
-            self.exit_end,
-            self.path if show_path else []
+            maze=self.maze,
+            width=self.width,
+            height=self.height,
+            block_42=self.block_42,
+            entry=self.entry,
+            exit_end=self.exit_end,
+            path=self.path if show_path else []
         )
