@@ -89,8 +89,6 @@ def print_maze(maze: List[List[Cell]], width: int, height: int,
                 content = " S "
             elif (r, c) == exit_end:
                 content = " E "
-            # elif path and (r, c) in path:
-            #        content= " * "
             else:
                 content = " " * cell_width
 

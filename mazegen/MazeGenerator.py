@@ -34,7 +34,11 @@ class MazeGenerator:
         self.solve_maze()
         self.write_output()
 
+<<<<<<< HEAD
     def solve_maze(self) -> None:
+=======
+    def shortest_path(self):
+>>>>>>> e2983811ddc2d3faef81342a91dda35591d80699
         """Find the shortest path using BFS."""
         result = find_shortest_path_bfs(
             self.maze, self.entry, self.exit_end,

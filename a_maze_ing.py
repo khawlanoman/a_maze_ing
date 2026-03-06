@@ -4,7 +4,7 @@ import time
 import curses
 import random
 import sys
-from typing import List, 
+from typing import List
 
 
 # -------------------- Path Animation --------------------
@@ -39,7 +39,7 @@ try:
     maze_gen = MazeGenerator(config)
     maze_gen.generate_maze()
 except Exception as e:
-    print(f"[ERROR] {e}")
+    print(f"[ERROR]: {e}")
     sys.exit(1)
 
 
