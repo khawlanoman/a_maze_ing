@@ -2,13 +2,17 @@ from mazegen.read_config import read_config
 from mazegen.MazeGenerator import MazeGenerator
 import time
 import curses
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from _curses import window
 import random
 import sys
 from typing import List
 
 
 # -------------------- Path Animation --------------------
-def animate_path(stdscr: "curses._CursesWindow", path: List[tuple[int, int]],
+
+def animate_path(stdscr: "window", path: List[tuple[int, int]],
                  start_x: int, entry: tuple, exit_end: tuple) -> None:
     if not path:
         return
@@ -45,7 +49,7 @@ except Exception as e:
 
 # -------------------- Main Curses UI ------------;--------
 
-def main(stdscr):
+def main(stdscr: "window") -> None:
 
     curses.curs_set(0)
     curses.start_color()
@@ -66,7 +70,7 @@ def main(stdscr):
     flag1 = False
     # ---------- A-maze-ing Logo ----------
 
-    def show_amazeing(stdscr):
+    def show_amazeing(stdscr: "window") -> None:
         stdscr.clear()
         art = [
             " █████╗    ███╗   ███╗ █████╗ ███████╗ ███████╗   ██╗███╗   ██╗ ██████╗ ", # noqa

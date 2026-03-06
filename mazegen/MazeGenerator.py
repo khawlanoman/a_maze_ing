@@ -16,7 +16,7 @@ class MazeGenerator:
         self.maze: list[list[Cell]]
         self.block_42: List = []
         self.path: List[tuple[int, int]] = []
-        self.moves: List[str]
+        self.moves: List[str] = []
 
     def generate_maze(self) -> None:
         """Create a new maze and compute path."""
@@ -31,14 +31,10 @@ class MazeGenerator:
             non_perfect(maze=self.maze, width=self.width,
                         height=self.height, block_42=self.block_42)
 
-        self.solve_maze()
+        self.shortest_path()
         self.write_output()
 
-<<<<<<< HEAD
-    def solve_maze(self) -> None:
-=======
-    def shortest_path(self):
->>>>>>> e2983811ddc2d3faef81342a91dda35591d80699
+    def shortest_path(self) -> None:
         """Find the shortest path using BFS."""
         result = find_shortest_path_bfs(
             self.maze, self.entry, self.exit_end,
