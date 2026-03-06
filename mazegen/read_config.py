@@ -46,9 +46,9 @@ def read_config(filename: str) -> dict:
                     width = int(value)
                 except ValueError:
                     raise config_exception("'WIDTH' value must be an integer!")
-                if width <= 0:
+                if width <= 3:
                     raise config_exception("'WIDTH' value must be greater"
-                                           " than 0!")
+                                           " than 2!")
                 data["WIDTH"] = width
 
             elif key == "HEIGHT":
@@ -59,8 +59,8 @@ def read_config(filename: str) -> dict:
                     height = int(value)
                 except ValueError:
                     raise config_exception("'HEIGHT' must be an integer!")
-                if height <= 0:
-                    raise config_exception("'HEIGHT' must be greater than 0!")
+                if height <= 3:
+                    raise config_exception("'HEIGHT' must be greater than 2!")
                 data["HEIGHT"] = height
 
             elif key in {"ENTRY", "EXIT"}:
@@ -72,13 +72,13 @@ def read_config(filename: str) -> dict:
                     raise config_exception(f"'{key}' must contain exactly two "
                                            f"numbers!")
                 try:
-                    x = int(parts[0].strip())
-                    y = int(parts[1].strip())
+                    x = int(parts[1].strip())
+                    y = int(parts[0].strip())
                     if "WIDTH" in data and "HEIGHT" in data:
                         if x >= data["WIDTH"] or y >= data["HEIGHT"]:
                             raise config_exception(f"in '{key}' coordinates "
-                                                   f"{x, y} must be less than "
-                                                   "'WIDTH' value")
+                                                   f"{y, x} must be less than "
+                                                   "'WIDTH' and 'HEIGHT' value")
                 except ValueError:
                     raise config_exception(f"'{key}' coordinates must"
                                            f" be integers!")
