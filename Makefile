@@ -15,7 +15,7 @@ fclean:
 	rm -rf maze.txt poetry.lock src/__pycache__ src/mazegen/__pycache__
 
 debug:
-	python3 -m pdb a_maze_ing.py
+	python3 -m pdb -tui a_maze_ing.py
 lint:
 	${POETRY} run flake8 .
 	${POETRY} run mypy . \
