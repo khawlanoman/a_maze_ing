@@ -21,6 +21,7 @@ def animate_path(stdscr: "window", path: List[tuple[int, int]],
     for current in path[1:]:
         y0, x0 = prev
         y1, x1 = current
+        """(screen_y0, screen_y1) coordinates of the start point in terminal"""
         screen_y0 = y0 * 2 + 1
         screen_x0 = start_x + (x0 * 4 + 2)
         screen_y1 = y1 * 2 + 1
@@ -29,8 +30,10 @@ def animate_path(stdscr: "window", path: List[tuple[int, int]],
         mid_x = (screen_x0 + screen_x1) // 2
 
         try:
+            """we put a dot in the midlle of two cells"""
             stdscr.addch(mid_y, mid_x, "•", curses.color_pair(9))
             if (y1, x1) != entry and (y1, x1) != exit_end:
+                """we put a dot in each cell in terminal"""
                 stdscr.addch(screen_y1, screen_x1, "•", curses.color_pair(9))
         except curses.error:
             pass
@@ -38,6 +41,7 @@ def animate_path(stdscr: "window", path: List[tuple[int, int]],
         prev = current
 
 
+"""Here we handle passing configuration file as argument"""
 if len(sys.argv) == 2:
     config_file = sys.argv[1]
 else:
@@ -50,20 +54,18 @@ try:
     maze_gen.generate_maze()
 except Exception as e:
     print(f"[ERROR]: {e}")
-    sys.exit(1)
-except Exception as e:
-    print(f"[ERROR]: {e}")
-    sys.exit(1)
 
 
 # -------------------- Main Curses UI ------------;--------
 
 def main(stdscr: "window") -> None:
 
+    """hides the cursor in a terminal window using the curses library."""
     curses.curs_set(0)
+    """It initializes color support in the terminal."""
     curses.start_color()
-    curses.use_default_colors()
     # Base colors
+    """It creates a reusable color combination that you can apply to maze"""
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_WHITE, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_GREEN)
@@ -90,11 +92,13 @@ def main(stdscr: "window") -> None:
             "╚═╝  ╚═╝   ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝ ╚══════╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ " # noqa
         ]
         h, w = stdscr.getmaxyx()
+        """We calculate to find the first row in terminal to affich design"""
         start_y = h // 2 - len(art) // 2
         for i, line in enumerate(art):
             x = w // 2 - len(line) // 2
             if 0 <= start_y + i < h:
                 stdscr.addstr(start_y + i, max(0, x), line)
+        """changes stored in virtual screen, refresh() updates it to global"""
         stdscr.refresh()
         time.sleep(1)
     while True:
