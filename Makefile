@@ -2,7 +2,7 @@ PYTHON = python3
 POETRY = poetry
 
 run: install
-		@$(POETRY) run $(PYTHON) a_maze_ing.py || true
+		@$(POETRY) run $(PYTHON) a_maze_ing.py config.txt || true
 
 install:
 	@pip install $(POETRY)

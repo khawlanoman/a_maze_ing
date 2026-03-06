@@ -5,15 +5,15 @@ class config_exception(Exception):
     pass
 
 
-def read_config() -> dict:
+def read_config(filename: str) -> dict:
     required = {"WIDTH", "HEIGHT", "ENTRY", "EXIT", "OUTPUT_FILE", "PERFECT"}
     data: dict[str, Any] = {}
 
     try:
-        with open("config.txt", "r") as file:
+        with open(filename, "r") as file:
             lines = file.readlines()
     except FileNotFoundError:
-        print("Error: 'config.txt' not found")
+        print("Error: configuration file not found")
         exit(1)
     try:
         found_keys = set()
@@ -24,7 +24,7 @@ def read_config() -> dict:
             elif "#" in line:
                 continue
             elif "=" not in line:
-                raise config_exception("Invalid data in 'config.txt'")
+                raise config_exception("Invalid data in configuration file")
             key, value = line.split("=", 1)
             key = key.strip().upper()
             value = value.strip()
@@ -34,7 +34,7 @@ def read_config() -> dict:
 
             if key in found_keys:
                 raise config_exception(f"Duplicate key '{key}' in "
-                                       f"'config.txt'")
+                                       f"configuration file")
 
             found_keys.add(key)
             if key == "WIDTH":

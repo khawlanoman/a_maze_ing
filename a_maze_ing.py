@@ -38,10 +38,19 @@ def animate_path(stdscr: "window", path: List[tuple[int, int]],
         prev = current
 
 
+if len(sys.argv) == 2:
+    config_file = sys.argv[1]
+else:
+    print("python3 a_maze_ing.py [config_file]")
+    sys.exit(1)
+
 try:
-    config = read_config()
+    config = read_config(config_file)
     maze_gen = MazeGenerator(config)
     maze_gen.generate_maze()
+except Exception as e:
+    print(f"[ERROR]: {e}")
+    sys.exit(1)
 except Exception as e:
     print(f"[ERROR]: {e}")
     sys.exit(1)
